@@ -5,7 +5,7 @@ import (
 	"errors"
 	"fmt"
 
-	worker "github.com/Dev-Miniplays/Ticketsv2-Worker"
+	worker "github.com/Dev-Miniplays/Ticketsv2-worker"
 	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/button"
 	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/command"
 	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/command/registry"

@@ -23,7 +23,7 @@ func (r ResponseMessage) Build() interface{} {
 	return interaction.NewResponseChannelMessage(r.Data.IntoApplicationCommandData())
 }
 
-func (r ResponseMessage) HandleDeferred(interactionData interaction.InteractionMetadata, worker *Ticketsv2-worker.Context) error {
+func (r ResponseMessage) HandleDeferred(interactionData interaction.InteractionMetadata, worker *worker.Context) error {
 	if time.Now().Sub(utils.SnowflakeToTime(interactionData.Id)) > time.Minute*14 {
 		return nil
 	}

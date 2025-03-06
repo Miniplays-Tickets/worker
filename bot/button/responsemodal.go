@@ -19,6 +19,6 @@ func (r ResponseModal) Build() interface{} {
 	return interaction.NewModalResponse(r.Data.CustomId, r.Data.Title, r.Data.Components)
 }
 
-func (r ResponseModal) HandleDeferred(interactionData interaction.InteractionMetadata, worker *Ticketsv2-worker.Context) error {
+func (r ResponseModal) HandleDeferred(interactionData interaction.InteractionMetadata, worker *worker.Context) error {
 	return errors.New("cannot defer modal response")
 }

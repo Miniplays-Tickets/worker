@@ -1,5 +1,5 @@
 
-module github.com/Dev-Miniplays/Ticketsv2-Worker
+module github.com/Dev-Miniplays/Ticketsv2-worker
 
 go 1.23.0
 
