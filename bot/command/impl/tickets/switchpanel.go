@@ -6,19 +6,19 @@ import (
 	"strings"
 	"time"
 
+	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/command"
+	cmdcontext "github.com/Dev-Miniplays/Ticketsv2-worker/bot/command/context"
+	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/command/registry"
+	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/constants"
+	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/customisation"
+	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/dbclient"
+	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/logic"
+	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/redis"
+	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/utils"
+	"github.com/Dev-Miniplays/Ticketsv2-worker/i18n"
 	"github.com/TicketsBot/common/permission"
 	"github.com/TicketsBot/common/sentry"
 	"github.com/TicketsBot/database"
-	"github.com/TicketsBot/worker/bot/command"
-	cmdcontext "github.com/TicketsBot/worker/bot/command/context"
-	"github.com/TicketsBot/worker/bot/command/registry"
-	"github.com/TicketsBot/worker/bot/constants"
-	"github.com/TicketsBot/worker/bot/customisation"
-	"github.com/TicketsBot/worker/bot/dbclient"
-	"github.com/TicketsBot/worker/bot/logic"
-	"github.com/TicketsBot/worker/bot/redis"
-	"github.com/TicketsBot/worker/bot/utils"
-	"github.com/TicketsBot/worker/i18n"
 	"github.com/rxdn/gdl/objects/channel"
 	"github.com/rxdn/gdl/objects/channel/embed"
 	"github.com/rxdn/gdl/objects/interaction"
@@ -37,7 +37,7 @@ func (c SwitchPanelCommand) Properties() registry.Properties {
 		Category:        command.Tickets,
 		InteractionOnly: true,
 		Arguments: command.Arguments(
-			command.NewRequiredAutocompleteableArgument("panel", "Ticket panel to switch the ticket to", interaction.OptionTypeInteger, i18n.MessageInvalidUser, c.AutoCompleteHandler), // TODO: Fix invalid message
+			command.NewRequiredAutocompleteableArgument("panel", "Ticket panel zu dem das Ticket gewechselt werden soll", interaction.OptionTypeInteger, i18n.MessageInvalidUser, c.AutoCompleteHandler), // TODO: Fix invalid message
 		),
 		Timeout: constants.TimeoutOpenTicket,
 	}

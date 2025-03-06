@@ -2,21 +2,22 @@ package tags
 
 import (
 	"context"
+	"time"
+
+	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/command"
+	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/command/registry"
+	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/customisation"
+	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/dbclient"
+	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/logic"
+	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/utils"
+	"github.com/Dev-Miniplays/Ticketsv2-worker/i18n"
 	"github.com/TicketsBot/common/model"
 	"github.com/TicketsBot/common/permission"
 	"github.com/TicketsBot/common/premium"
 	"github.com/TicketsBot/common/sentry"
-	"github.com/TicketsBot/worker/bot/command"
-	"github.com/TicketsBot/worker/bot/command/registry"
-	"github.com/TicketsBot/worker/bot/customisation"
-	"github.com/TicketsBot/worker/bot/dbclient"
-	"github.com/TicketsBot/worker/bot/logic"
-	"github.com/TicketsBot/worker/bot/utils"
-	"github.com/TicketsBot/worker/i18n"
 	"github.com/rxdn/gdl/objects/channel/embed"
 	"github.com/rxdn/gdl/objects/channel/message"
 	"github.com/rxdn/gdl/objects/interaction"
-	"time"
 )
 
 type TagCommand struct {

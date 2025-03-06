@@ -4,15 +4,17 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"time"
+
+	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/button"
+	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/command"
+	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/command/registry"
+	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/errorcontext"
+	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/utils"
 	permcache "github.com/TicketsBot/common/permission"
 	"github.com/TicketsBot/common/premium"
 	"github.com/TicketsBot/common/sentry"
 	"github.com/TicketsBot/worker"
-	"github.com/TicketsBot/worker/bot/button"
-	"github.com/TicketsBot/worker/bot/command"
-	"github.com/TicketsBot/worker/bot/command/registry"
-	"github.com/TicketsBot/worker/bot/errorcontext"
-	"github.com/TicketsBot/worker/bot/utils"
 	"github.com/rxdn/gdl/objects/channel"
 	"github.com/rxdn/gdl/objects/channel/message"
 	"github.com/rxdn/gdl/objects/guild"
@@ -22,7 +24,6 @@ import (
 	"github.com/rxdn/gdl/objects/user"
 	"github.com/rxdn/gdl/rest"
 	"go.uber.org/atomic"
-	"time"
 )
 
 type ModalContext struct {

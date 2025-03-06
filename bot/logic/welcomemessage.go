@@ -9,18 +9,17 @@ import (
 	"sync"
 	"time"
 
+	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/command/registry"
+	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/customisation"
+	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/dbclient"
+	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/integrations"
+	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/utils"
+	"github.com/Dev-Miniplays/Ticketsv2-worker/i18n"
 	"github.com/TicketsBot/common/integrations/bloxlink"
 	"github.com/TicketsBot/common/premium"
 	"github.com/TicketsBot/common/sentry"
 	"github.com/TicketsBot/database"
 	"github.com/TicketsBot/worker"
-	"github.com/TicketsBot/worker/bot/command/registry"
-	"github.com/TicketsBot/worker/bot/customisation"
-	"github.com/TicketsBot/worker/bot/dbclient"
-	"github.com/TicketsBot/worker/bot/integrations"
-	"github.com/TicketsBot/worker/bot/utils"
-	"github.com/TicketsBot/worker/config"
-	"github.com/TicketsBot/worker/i18n"
 	"github.com/rxdn/gdl/objects/channel/embed"
 	"github.com/rxdn/gdl/objects/guild/emoji"
 	"github.com/rxdn/gdl/objects/interaction/component"
@@ -60,10 +59,6 @@ func SendWelcomeMessage(
 
 		for _, field := range fields {
 			formAnswersEmbed.AddField(field.Name, utils.EscapeMarkdown(field.Value), field.Inline)
-		}
-
-		if cmd.PremiumTier() == premium.None {
-			formAnswersEmbed.SetFooter(fmt.Sprintf("Powered by %s", config.Conf.Bot.PoweredBy), config.Conf.Bot.IconUrl)
 		}
 
 		embeds = append(embeds, formAnswersEmbed)
@@ -579,12 +574,6 @@ func BuildCustomEmbed(
 		Url:         utils.ValueOrZero(customEmbed.Url),
 		Timestamp:   customEmbed.Timestamp,
 		Color:       int(customEmbed.Colour),
-	}
-
-	if branding {
-		e.SetFooter(fmt.Sprintf("Powered by %s", config.Conf.Bot.PoweredBy), config.Conf.Bot.IconUrl)
-	} else if customEmbed.FooterText != nil {
-		e.SetFooter(*customEmbed.FooterText, utils.ValueOrZero(customEmbed.FooterIconUrl))
 	}
 
 	if customEmbed.ImageUrl != nil {

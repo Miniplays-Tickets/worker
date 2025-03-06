@@ -1,14 +1,14 @@
 package tickets
 
 import (
+	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/command"
+	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/command/context"
+	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/command/registry"
+	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/constants"
+	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/customisation"
+	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/logic"
+	"github.com/Dev-Miniplays/Ticketsv2-worker/i18n"
 	"github.com/TicketsBot/common/permission"
-	"github.com/TicketsBot/worker/bot/command"
-	"github.com/TicketsBot/worker/bot/command/context"
-	"github.com/TicketsBot/worker/bot/command/registry"
-	"github.com/TicketsBot/worker/bot/constants"
-	"github.com/TicketsBot/worker/bot/customisation"
-	"github.com/TicketsBot/worker/bot/logic"
-	"github.com/TicketsBot/worker/i18n"
 	"github.com/rxdn/gdl/objects/interaction"
 )
 
@@ -24,7 +24,7 @@ func (OpenCommand) Properties() registry.Properties {
 		PermissionLevel: permission.Everyone,
 		Category:        command.Tickets,
 		Arguments: command.Arguments(
-			command.NewOptionalArgument("subject", "The subject of the ticket", interaction.OptionTypeString, "infallible"),
+			command.NewOptionalArgument("subject", "Der Grund des Tickets", interaction.OptionTypeString, "infallible"),
 		),
 		DefaultEphemeral: true,
 		Timeout:          constants.TimeoutOpenTicket,

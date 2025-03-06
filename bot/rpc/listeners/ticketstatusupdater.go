@@ -3,11 +3,12 @@ package listeners
 import (
 	"context"
 	"encoding/json"
+
+	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/metrics/prometheus"
+	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/redis"
 	"github.com/TicketsBot/common/rpc"
 	"github.com/TicketsBot/common/rpc/model"
 	"github.com/TicketsBot/worker"
-	"github.com/TicketsBot/worker/bot/metrics/prometheus"
-	"github.com/TicketsBot/worker/bot/redis"
 	"github.com/rxdn/gdl/cache"
 	"github.com/rxdn/gdl/objects/channel"
 	"github.com/rxdn/gdl/rest"

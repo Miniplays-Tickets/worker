@@ -5,13 +5,13 @@ import (
 	"fmt"
 	"strconv"
 
+	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/customisation"
+	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/dbclient"
+	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/utils"
+	"github.com/Dev-Miniplays/Ticketsv2-worker/config"
 	"github.com/TicketsBot/common/sentry"
 	"github.com/TicketsBot/database"
 	"github.com/TicketsBot/worker"
-	"github.com/TicketsBot/worker/bot/customisation"
-	"github.com/TicketsBot/worker/bot/dbclient"
-	"github.com/TicketsBot/worker/bot/utils"
-	"github.com/TicketsBot/worker/config"
 	"github.com/rxdn/gdl/objects/channel/embed"
 	"github.com/rxdn/gdl/objects/channel/message"
 	"github.com/rxdn/gdl/objects/guild/emoji"
@@ -41,7 +41,7 @@ func TranscriptLinkElement(condition bool) CloseEmbedElement {
 		transcriptLink := fmt.Sprintf("%s/manage/%d/transcripts/view/%d", config.Conf.Bot.DashboardUrl, ticket.GuildId, ticket.Id)
 
 		return utils.Slice(component.BuildButton(component.Button{
-			Label: "View Online Transcript",
+			Label: "Online Transcript ansehen",
 			Style: component.ButtonStyleLink,
 			Emoji: transcriptEmoji,
 			Url:   utils.Ptr(transcriptLink),
@@ -62,7 +62,7 @@ func ThreadLinkElement(condition bool) CloseEmbedElement {
 
 		return utils.Slice(
 			component.BuildButton(component.Button{
-				Label: "View Thread",
+				Label: "Ticket Ansehen",
 				Style: component.ButtonStyleLink,
 				Emoji: threadEmoji,
 				Url:   utils.Ptr(fmt.Sprintf("https://discord.com/channels/%d/%d", ticket.GuildId, *ticket.ChannelId)),
@@ -131,7 +131,7 @@ func BuildCloseEmbed(
 ) (*embed.Embed, []component.Component) {
 	var formattedReason string
 	if reason == nil {
-		formattedReason = "No reason specified"
+		formattedReason = "Kein Grund Angegeben"
 	} else {
 		formattedReason = *reason
 		if len(formattedReason) > 1024 {
@@ -147,7 +147,7 @@ func BuildCloseEmbed(
 		}
 
 		if claimUserId == 0 {
-			claimedBy = "Not claimed"
+			claimedBy = "Nicht Beansprucht"
 		} else {
 			claimedBy = fmt.Sprintf("<@%d>", claimUserId)
 		}
@@ -161,13 +161,13 @@ func BuildCloseEmbed(
 
 	// TODO: Translate titles
 	closeEmbed := embed.NewEmbed().
-		SetTitle("Ticket Closed").
+		SetTitle("Ticket Geschlossen").
 		SetColor(colour).
 		AddField(formatTitle("Ticket ID", customisation.EmojiId, worker.IsWhitelabel), strconv.Itoa(ticket.Id), true).
-		AddField(formatTitle("Opened By", customisation.EmojiOpen, worker.IsWhitelabel), fmt.Sprintf("<@%d>", ticket.UserId), true).
-		AddField(formatTitle("Closed By", customisation.EmojiClose, worker.IsWhitelabel), fmt.Sprintf("<@%d>", closedBy), true).
-		AddField(formatTitle("Open Time", customisation.EmojiOpenTime, worker.IsWhitelabel), message.BuildTimestamp(ticket.OpenTime, message.TimestampStyleShortDateTime), true).
-		AddField(formatTitle("Claimed By", customisation.EmojiClaim, worker.IsWhitelabel), claimedBy, true)
+		AddField(formatTitle("Geöffnet von", customisation.EmojiOpen, worker.IsWhitelabel), fmt.Sprintf("<@%d>", ticket.UserId), true).
+		AddField(formatTitle("Geschlossen von", customisation.EmojiClose, worker.IsWhitelabel), fmt.Sprintf("<@%d>", closedBy), true).
+		AddField(formatTitle("Geöffnet am", customisation.EmojiOpenTime, worker.IsWhitelabel), message.BuildTimestamp(ticket.OpenTime, message.TimestampStyleShortDateTime), true).
+		AddField(formatTitle("Beansprucht von", customisation.EmojiClaim, worker.IsWhitelabel), claimedBy, true)
 
 	if ticket.CloseTime != nil {
 		closeEmbed.SetTimestamp(*ticket.CloseTime)
@@ -176,10 +176,10 @@ func BuildCloseEmbed(
 	if rating == nil {
 		closeEmbed = closeEmbed.AddBlankField(true)
 	} else {
-		closeEmbed = closeEmbed.AddField(formatTitle("Rating", customisation.EmojiRating, worker.IsWhitelabel), fmt.Sprintf("%d ⭐", *rating), true)
+		closeEmbed = closeEmbed.AddField(formatTitle("Bewertung", customisation.EmojiRating, worker.IsWhitelabel), fmt.Sprintf("%d ⭐", *rating), true)
 	}
 
-	closeEmbed = closeEmbed.AddField(formatTitle("Reason", customisation.EmojiReason, worker.IsWhitelabel), formattedReason, false)
+	closeEmbed = closeEmbed.AddField(formatTitle("Grund", customisation.EmojiReason, worker.IsWhitelabel), formattedReason, false)
 
 	var rows []component.Component
 	for _, row := range components {

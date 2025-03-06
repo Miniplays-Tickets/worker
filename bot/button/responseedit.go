@@ -2,8 +2,9 @@ package button
 
 import (
 	"context"
-	"github.com/TicketsBot/worker"
-	"github.com/TicketsBot/worker/bot/command"
+
+	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/command"
+	"github.com/Dev-Miniplays/Ticketsv2-worker"
 	"github.com/rxdn/gdl/objects/interaction"
 	"github.com/rxdn/gdl/rest"
 )
@@ -20,7 +21,7 @@ func (r ResponseEdit) Build() interface{} {
 	return interaction.NewResponseUpdateMessage(r.Data.IntoUpdateMessageResponse())
 }
 
-func (r ResponseEdit) HandleDeferred(interactionData interaction.InteractionMetadata, worker *worker.Context) error {
+func (r ResponseEdit) HandleDeferred(interactionData interaction.InteractionMetadata, worker *Ticketsv2-worker.Context) error {
 	_, err := rest.EditOriginalInteractionResponse(context.Background(), interactionData.Token, worker.RateLimiter, interactionData.ApplicationId, r.Data.IntoWebhookEditBody())
 	return err
 }

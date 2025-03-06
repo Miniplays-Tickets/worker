@@ -3,17 +3,18 @@ package handlers
 import (
 	"context"
 	"errors"
+	"time"
+
+	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/button/registry"
+	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/button/registry/matcher"
+	commandcontext "github.com/Dev-Miniplays/Ticketsv2-worker/bot/command/context"
+	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/customisation"
+	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/dbclient"
+	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/utils"
+	"github.com/Dev-Miniplays/Ticketsv2-worker/i18n"
 	"github.com/TicketsBot/common/model"
 	"github.com/TicketsBot/common/permission"
-	"github.com/TicketsBot/worker/bot/button/registry"
-	"github.com/TicketsBot/worker/bot/button/registry/matcher"
-	commandcontext "github.com/TicketsBot/worker/bot/command/context"
-	"github.com/TicketsBot/worker/bot/customisation"
-	"github.com/TicketsBot/worker/bot/dbclient"
-	"github.com/TicketsBot/worker/bot/utils"
-	"github.com/TicketsBot/worker/i18n"
 	"github.com/google/uuid"
-	"time"
 )
 
 type PremiumKeySubmitHandler struct{}

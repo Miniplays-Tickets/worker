@@ -2,11 +2,12 @@ package listeners
 
 import (
 	"context"
+	"time"
+
+	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/dbclient"
 	"github.com/TicketsBot/common/sentry"
 	"github.com/TicketsBot/worker"
-	"github.com/TicketsBot/worker/bot/dbclient"
 	"github.com/rxdn/gdl/gateway/payloads/events"
-	"time"
 )
 
 func OnChannelDelete(worker *worker.Context, e events.ChannelDelete) {

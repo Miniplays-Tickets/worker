@@ -2,22 +2,23 @@ package statistics
 
 import (
 	"fmt"
+	"strconv"
+	"time"
+
+	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/command"
+	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/command/registry"
+	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/customisation"
+	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/dbclient"
+	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/utils"
+	"github.com/Dev-Miniplays/Ticketsv2-worker/i18n"
 	"github.com/TicketsBot/analytics-client"
 	"github.com/TicketsBot/common/permission"
-	"github.com/TicketsBot/worker/bot/command"
-	"github.com/TicketsBot/worker/bot/command/registry"
-	"github.com/TicketsBot/worker/bot/customisation"
-	"github.com/TicketsBot/worker/bot/dbclient"
-	"github.com/TicketsBot/worker/bot/utils"
-	"github.com/TicketsBot/worker/i18n"
 	"github.com/getsentry/sentry-go"
 	"github.com/jedib0t/go-pretty/v6/table"
 	"github.com/jedib0t/go-pretty/v6/text"
 	"github.com/rxdn/gdl/objects/channel/embed"
 	"github.com/rxdn/gdl/objects/interaction"
 	"golang.org/x/sync/errgroup"
-	"strconv"
-	"time"
 )
 
 type StatsServerCommand struct {
@@ -143,21 +144,21 @@ func (StatsServerCommand) Execute(ctx registry.CommandContext) {
 	span = sentry.StartSpan(span.Context(), "Send Message")
 
 	msgEmbed := embed.NewEmbed().
-		SetTitle("Statistics").
+		SetTitle("Statistiken").
 		SetColor(ctx.GetColour(customisation.Green)).
-		AddField("Total Tickets", strconv.FormatUint(totalTickets, 10), true).
-		AddField("Open Tickets", strconv.FormatUint(openTickets, 10), true).
+		AddField("Gesammte Ticketanzahl", strconv.FormatUint(totalTickets, 10), true).
+		AddField("Aktuell offene Tickets", strconv.FormatUint(openTickets, 10), true).
 		AddBlankField(true).
-		AddField("Feedback Rating", fmt.Sprintf("%.1f / 5 ⭐", feedbackRating), true).
-		AddField("Feedback Count", strconv.FormatUint(feedbackCount, 10), true).
+		AddField("Feedback", fmt.Sprintf("%.1f / 5 ⭐", feedbackRating), true).
+		AddField("Feedback anzahl", strconv.FormatUint(feedbackCount, 10), true).
 		AddBlankField(true).
-		AddField("Average First Response Time (Total)", formatNullableTime(firstResponseTime.AllTime), true).
-		AddField("Average First Response Time (Monthly)", formatNullableTime(firstResponseTime.Monthly), true).
-		AddField("Average First Response Time (Weekly)", formatNullableTime(firstResponseTime.Weekly), true).
-		AddField("Average Ticket Duration (Total)", formatNullableTime(ticketDuration.AllTime), true).
-		AddField("Average Ticket Duration (Monthly)", formatNullableTime(ticketDuration.Monthly), true).
-		AddField("Average Ticket Duration (Weekly)", formatNullableTime(ticketDuration.Weekly), true).
-		AddField("Ticket Volume", fmt.Sprintf("```\n%s\n```", ticketVolumeTable), false)
+		AddField("Zeit bis zur ersten Antwort (Insgesammt)", formatNullableTime(firstResponseTime.AllTime), true).
+		AddField("Zeit bis zur ersten Antwort (Monatlich)", formatNullableTime(firstResponseTime.Monthly), true).
+		AddField("Zeit bis zur ersten Antwort (Wöchentlich)", formatNullableTime(firstResponseTime.Weekly), true).
+		AddField("Durchschnittliche Bearbeitungszeit (Insgesammt)", formatNullableTime(ticketDuration.AllTime), true).
+		AddField("Durchschnittliche Bearbeitungszeit (Monatlich)", formatNullableTime(ticketDuration.Monthly), true).
+		AddField("Durchschnittliche Bearbeitungszeit (Wöchentlich)", formatNullableTime(ticketDuration.Weekly), true).
+		AddField("Ticket Anzahl", fmt.Sprintf("```\n%s\n```", ticketVolumeTable), false)
 
 	_, _ = ctx.ReplyWith(command.NewEphemeralEmbedMessageResponse(msgEmbed))
 	span.Finish()

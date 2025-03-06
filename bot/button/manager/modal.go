@@ -2,15 +2,16 @@ package manager
 
 import (
 	"context"
+	"time"
+
+	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/button"
+	cmdcontext "github.com/Dev-Miniplays/Ticketsv2-worker/bot/command/context"
+	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/errorcontext"
+	"github.com/Dev-Miniplays/Ticketsv2-worker/config"
 	"github.com/TicketsBot/common/premium"
 	"github.com/TicketsBot/common/sentry"
 	"github.com/TicketsBot/worker"
-	"github.com/TicketsBot/worker/bot/button"
-	cmdcontext "github.com/TicketsBot/worker/bot/command/context"
-	"github.com/TicketsBot/worker/bot/errorcontext"
-	"github.com/TicketsBot/worker/config"
 	"github.com/rxdn/gdl/objects/interaction"
-	"time"
 )
 
 func HandleModalInteraction(ctx context.Context, manager *ComponentInteractionManager, worker *worker.Context, data interaction.ModalSubmitInteraction, responseCh chan button.Response) bool {

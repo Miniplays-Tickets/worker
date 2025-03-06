@@ -1,8 +1,9 @@
 package registry
 
 import (
-	"github.com/TicketsBot/common/permission"
 	"time"
+
+	"github.com/TicketsBot/common/permission"
 )
 
 type Properties struct {

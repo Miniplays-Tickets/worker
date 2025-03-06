@@ -2,11 +2,12 @@ package handlers
 
 import (
 	"fmt"
-	"github.com/TicketsBot/worker/bot/button/registry"
-	"github.com/TicketsBot/worker/bot/button/registry/matcher"
-	"github.com/TicketsBot/worker/bot/command/context"
-	"github.com/TicketsBot/worker/bot/constants"
-	"github.com/TicketsBot/worker/bot/logic"
+
+	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/button/registry"
+	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/button/registry/matcher"
+	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/command/context"
+	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/constants"
+	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/logic"
 )
 
 type CloseWithReasonSubmitHandler struct{}

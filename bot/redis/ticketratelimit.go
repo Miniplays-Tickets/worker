@@ -2,9 +2,10 @@ package redis
 
 import (
 	"fmt"
+	"time"
+
 	"github.com/TicketsBot/common/utils"
 	"github.com/go-redis/redis/v8"
-	"time"
 )
 
 var script = redis.NewScript(`

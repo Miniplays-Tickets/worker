@@ -2,17 +2,18 @@ package settings
 
 import (
 	"fmt"
+	"time"
+
+	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/command"
+	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/command/context"
+	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/command/registry"
+	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/customisation"
+	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/utils"
+	"github.com/Dev-Miniplays/Ticketsv2-worker/i18n"
 	permcache "github.com/TicketsBot/common/permission"
-	"github.com/TicketsBot/worker/bot/command"
-	"github.com/TicketsBot/worker/bot/command/context"
-	"github.com/TicketsBot/worker/bot/command/registry"
-	"github.com/TicketsBot/worker/bot/customisation"
-	"github.com/TicketsBot/worker/bot/utils"
-	"github.com/TicketsBot/worker/i18n"
 	"github.com/rxdn/gdl/objects/channel/embed"
 	"github.com/rxdn/gdl/objects/interaction"
 	"github.com/rxdn/gdl/objects/interaction/component"
-	"time"
 )
 
 type AddSupportCommand struct{}
@@ -27,7 +28,7 @@ func (AddSupportCommand) Properties() registry.Properties {
 		Category:        command.Settings,
 		InteractionOnly: true,
 		Arguments: command.Arguments(
-			command.NewRequiredArgument("role", "Role to apply the support representative permission to", interaction.OptionTypeMentionable, i18n.MessageAddSupportNoMembers),
+			command.NewRequiredArgument("role", "Rolle der Supporter Rechte gegeben werden", interaction.OptionTypeMentionable, i18n.MessageAddSupportNoMembers),
 		),
 		DefaultEphemeral: true,
 		Timeout:          time.Second * 3,
@@ -53,7 +54,7 @@ func (c AddSupportCommand) Execute(ctx registry.CommandContext, id uint64) {
 
 	var mention string
 	if mentionableType == context.MentionableTypeUser {
-		ctx.ReplyRaw(customisation.Red, "Error", "Users in support teams are now deprecated. Please use roles instead.")
+		ctx.ReplyRaw(customisation.Red, "Error", "Benutzer in Support Teams sind nicht mehr Unterstützt. Bitte verwende Rollen stattdessen.")
 		return
 
 		//mention = fmt.Sprintf("<@%d>", id)

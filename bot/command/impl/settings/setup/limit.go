@@ -1,14 +1,15 @@
 package setup
 
 import (
-	"github.com/TicketsBot/common/permission"
-	"github.com/TicketsBot/worker/bot/command"
-	"github.com/TicketsBot/worker/bot/command/registry"
-	"github.com/TicketsBot/worker/bot/customisation"
-	"github.com/TicketsBot/worker/bot/dbclient"
-	"github.com/TicketsBot/worker/i18n"
-	"github.com/rxdn/gdl/objects/interaction"
 	"time"
+
+	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/command"
+	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/command/registry"
+	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/customisation"
+	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/dbclient"
+	"github.com/Dev-Miniplays/Ticketsv2-worker/i18n"
+	"github.com/TicketsBot/common/permission"
+	"github.com/rxdn/gdl/objects/interaction"
 )
 
 type LimitSetupCommand struct{}
@@ -21,7 +22,7 @@ func (LimitSetupCommand) Properties() registry.Properties {
 		PermissionLevel: permission.Admin,
 		Category:        command.Settings,
 		Arguments: command.Arguments(
-			command.NewRequiredArgument("limit", "The maximum amount of tickets a user can have open simultaneously", interaction.OptionTypeInteger, i18n.SetupLimitInvalid),
+			command.NewRequiredArgument("limit", "Die Anzahl der maximalen Tickets die ein User gleichzeitig offen haben kann", interaction.OptionTypeInteger, i18n.SetupLimitInvalid),
 		),
 		Timeout: time.Second * 3,
 	}

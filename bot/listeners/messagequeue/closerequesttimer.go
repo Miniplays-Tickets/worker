@@ -2,17 +2,18 @@ package messagequeue
 
 import (
 	"context"
+
+	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/cache"
+	cmdcontext "github.com/Dev-Miniplays/Ticketsv2-worker/bot/command/context"
+	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/constants"
+	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/dbclient"
+	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/logic"
+	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/metrics/statsd"
+	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/redis"
+	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/utils"
 	"github.com/TicketsBot/common/closerequest"
 	"github.com/TicketsBot/common/sentry"
 	"github.com/TicketsBot/database"
-	"github.com/TicketsBot/worker/bot/cache"
-	cmdcontext "github.com/TicketsBot/worker/bot/command/context"
-	"github.com/TicketsBot/worker/bot/constants"
-	"github.com/TicketsBot/worker/bot/dbclient"
-	"github.com/TicketsBot/worker/bot/logic"
-	"github.com/TicketsBot/worker/bot/metrics/statsd"
-	"github.com/TicketsBot/worker/bot/redis"
-	"github.com/TicketsBot/worker/bot/utils"
 )
 
 func ListenCloseRequestTimer() {

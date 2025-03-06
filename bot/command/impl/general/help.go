@@ -1,19 +1,16 @@
 package general
 
 import (
-	"fmt"
 	"sort"
 	"strings"
 	"time"
 
+	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/command"
+	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/command/registry"
+	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/customisation"
+	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/utils"
+	"github.com/Dev-Miniplays/Ticketsv2-worker/i18n"
 	"github.com/TicketsBot/common/permission"
-	"github.com/TicketsBot/common/premium"
-	"github.com/TicketsBot/worker/bot/command"
-	"github.com/TicketsBot/worker/bot/command/registry"
-	"github.com/TicketsBot/worker/bot/customisation"
-	"github.com/TicketsBot/worker/bot/utils"
-	"github.com/TicketsBot/worker/config"
-	"github.com/TicketsBot/worker/i18n"
 	"github.com/elliotchance/orderedmap"
 	"github.com/rxdn/gdl/objects/channel/embed"
 	"github.com/rxdn/gdl/objects/interaction"
@@ -124,10 +121,6 @@ func (c HelpCommand) Execute(ctx registry.CommandContext) {
 
 			embed.AddField(string(category.(command.Category)), strings.Join(formatted, "\n"), false)
 		}
-	}
-
-	if ctx.PremiumTier() == premium.None {
-		embed.SetFooter(fmt.Sprintf("Powered by %s", config.Conf.Bot.PoweredBy), config.Conf.Bot.IconUrl)
 	}
 
 	// Explicitly ignore error to fix 403 (Cannot send messages to this user)

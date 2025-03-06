@@ -1,15 +1,16 @@
 package setup
 
 import (
+	"time"
+
+	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/command"
+	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/command/registry"
+	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/customisation"
+	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/dbclient"
+	"github.com/Dev-Miniplays/Ticketsv2-worker/i18n"
 	"github.com/TicketsBot/common/permission"
-	"github.com/TicketsBot/worker/bot/command"
-	"github.com/TicketsBot/worker/bot/command/registry"
-	"github.com/TicketsBot/worker/bot/customisation"
-	"github.com/TicketsBot/worker/bot/dbclient"
-	"github.com/TicketsBot/worker/i18n"
 	"github.com/rxdn/gdl/objects/channel"
 	"github.com/rxdn/gdl/objects/interaction"
-	"time"
 )
 
 type ThreadsSetupCommand struct{}
@@ -22,8 +23,8 @@ func (ThreadsSetupCommand) Properties() registry.Properties {
 		PermissionLevel: permission.Admin,
 		Category:        command.Settings,
 		Arguments: command.Arguments(
-			command.NewRequiredArgument("use_threads", "Whether or not private threads should be used for ticket", interaction.OptionTypeBoolean, "infallible"),
-			command.NewOptionalArgument("ticket_notification_channel", "The channel that ticket open notifications should be sent to", interaction.OptionTypeChannel, "infallible"),
+			command.NewRequiredArgument("use_threads", "Ob Private Threads oder nicht für Tickets genutzt werden sollen", interaction.OptionTypeBoolean, "infallible"),
+			command.NewOptionalArgument("ticket_notification_channel", "Der Kanal wo Benarichtigungen für offene Tickets gesendet werden sollen", interaction.OptionTypeChannel, "infallible"),
 		),
 		InteractionOnly: true,
 		Timeout:         time.Second * 5,

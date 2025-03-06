@@ -3,16 +3,19 @@ package event
 import (
 	"context"
 	"fmt"
+	"strings"
+	"time"
+
+	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/button"
+	btn_manager "github.com/Dev-Miniplays/Ticketsv2-worker/bot/button/manager"
+	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/command"
+	cmd_manager "github.com/Dev-Miniplays/Ticketsv2-worker/bot/command/manager"
+	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/metrics/prometheus"
+	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/utils"
+	"github.com/Dev-Miniplays/Ticketsv2-worker/config"
 	"github.com/TicketsBot/common/eventforwarding"
 	"github.com/TicketsBot/common/sentry"
 	"github.com/TicketsBot/worker"
-	"github.com/TicketsBot/worker/bot/button"
-	btn_manager "github.com/TicketsBot/worker/bot/button/manager"
-	"github.com/TicketsBot/worker/bot/command"
-	cmd_manager "github.com/TicketsBot/worker/bot/command/manager"
-	"github.com/TicketsBot/worker/bot/metrics/prometheus"
-	"github.com/TicketsBot/worker/bot/utils"
-	"github.com/TicketsBot/worker/config"
 	"github.com/gin-gonic/gin"
 	"github.com/go-redis/redis/v8"
 	"github.com/rxdn/gdl/cache"
@@ -20,8 +23,6 @@ import (
 	"github.com/rxdn/gdl/objects/interaction"
 	"github.com/rxdn/gdl/rest"
 	"github.com/sirupsen/logrus"
-	"strings"
-	"time"
 )
 
 type response struct {

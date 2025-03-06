@@ -2,7 +2,8 @@ package button
 
 import (
 	"errors"
-	"github.com/TicketsBot/worker"
+
+	"github.com/Dev-Miniplays/Ticketsv2-worker"
 	"github.com/rxdn/gdl/objects/interaction"
 )
 
@@ -18,6 +19,6 @@ func (r ResponseModal) Build() interface{} {
 	return interaction.NewModalResponse(r.Data.CustomId, r.Data.Title, r.Data.Components)
 }
 
-func (r ResponseModal) HandleDeferred(interactionData interaction.InteractionMetadata, worker *worker.Context) error {
+func (r ResponseModal) HandleDeferred(interactionData interaction.InteractionMetadata, worker *Ticketsv2-worker.Context) error {
 	return errors.New("cannot defer modal response")
 }

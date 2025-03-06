@@ -2,15 +2,13 @@ package utils
 
 import (
 	"context"
-	"fmt"
 
+	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/command/registry"
+	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/customisation"
+	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/dbclient"
+	"github.com/Dev-Miniplays/Ticketsv2-worker/i18n"
 	"github.com/TicketsBot/common/premium"
 	"github.com/TicketsBot/worker"
-	"github.com/TicketsBot/worker/bot/command/registry"
-	"github.com/TicketsBot/worker/bot/customisation"
-	"github.com/TicketsBot/worker/bot/dbclient"
-	"github.com/TicketsBot/worker/config"
-	"github.com/TicketsBot/worker/i18n"
 	"github.com/rxdn/gdl/objects/channel/embed"
 	"github.com/rxdn/gdl/objects/guild/emoji"
 )
@@ -32,10 +30,6 @@ func BuildEmbed(
 		msgEmbed.AddField(field.Name, field.Value, field.Inline)
 	}
 
-	if ctx.PremiumTier() == premium.None {
-		msgEmbed.SetFooter(fmt.Sprintf("Powered by %s", config.Conf.Bot.PoweredBy), config.Conf.Bot.IconUrl)
-	}
-
 	return msgEmbed
 }
 
@@ -49,10 +43,6 @@ func BuildEmbedRaw(
 
 	for _, field := range fields {
 		msgEmbed.AddField(field.Name, field.Value, field.Inline)
-	}
-
-	if tier == premium.None {
-		msgEmbed.SetFooter(fmt.Sprintf("Powered by %s", config.Conf.Bot.PoweredBy), config.Conf.Bot.IconUrl)
 	}
 
 	return msgEmbed

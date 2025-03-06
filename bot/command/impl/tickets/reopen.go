@@ -2,16 +2,17 @@ package tickets
 
 import (
 	"context"
-	"github.com/TicketsBot/common/permission"
-	"github.com/TicketsBot/common/sentry"
-	"github.com/TicketsBot/worker/bot/command"
-	"github.com/TicketsBot/worker/bot/command/registry"
-	"github.com/TicketsBot/worker/bot/dbclient"
-	"github.com/TicketsBot/worker/bot/logic"
-	"github.com/TicketsBot/worker/i18n"
-	"github.com/rxdn/gdl/objects/interaction"
 	"strconv"
 	"time"
+
+	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/command"
+	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/command/registry"
+	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/dbclient"
+	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/logic"
+	"github.com/Dev-Miniplays/Ticketsv2-worker/i18n"
+	"github.com/TicketsBot/common/permission"
+	"github.com/TicketsBot/common/sentry"
+	"github.com/rxdn/gdl/objects/interaction"
 )
 
 type ReopenCommand struct {
@@ -25,7 +26,7 @@ func (c ReopenCommand) Properties() registry.Properties {
 		PermissionLevel: permission.Everyone,
 		Category:        command.Tickets,
 		Arguments: command.Arguments(
-			command.NewRequiredAutocompleteableArgument("ticket_id", "ID of the ticket to reopen", interaction.OptionTypeInteger, i18n.MessageInvalidArgument, c.AutoCompleteHandler),
+			command.NewRequiredAutocompleteableArgument("ticket_id", "ID des Tickets das erneut geöffnet werden soll", interaction.OptionTypeInteger, i18n.MessageInvalidArgument, c.AutoCompleteHandler),
 		),
 		DefaultEphemeral: true,
 		Timeout:          time.Second * 10,

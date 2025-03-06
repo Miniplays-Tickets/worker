@@ -2,19 +2,20 @@ package handlers
 
 import (
 	"errors"
+	"time"
+
+	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/button/registry"
+	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/button/registry/matcher"
+	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/command/context"
+	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/customisation"
+	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/dbclient"
+	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/utils"
+	"github.com/Dev-Miniplays/Ticketsv2-worker/config"
+	"github.com/Dev-Miniplays/Ticketsv2-worker/i18n"
 	"github.com/TicketsBot/common/model"
 	"github.com/TicketsBot/common/permission"
-	"github.com/TicketsBot/worker/bot/button/registry"
-	"github.com/TicketsBot/worker/bot/button/registry/matcher"
-	"github.com/TicketsBot/worker/bot/command/context"
-	"github.com/TicketsBot/worker/bot/customisation"
-	"github.com/TicketsBot/worker/bot/dbclient"
-	"github.com/TicketsBot/worker/bot/utils"
-	"github.com/TicketsBot/worker/config"
-	"github.com/TicketsBot/worker/i18n"
 	"github.com/jackc/pgx/v4"
 	"github.com/rxdn/gdl/objects/interaction/component"
-	"time"
 )
 
 type RedeemVoteCreditsHandler struct{}

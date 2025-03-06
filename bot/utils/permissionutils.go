@@ -2,10 +2,11 @@ package utils
 
 import (
 	"context"
+
+	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/command/registry"
+	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/dbclient"
 	"github.com/TicketsBot/common/permission"
 	"github.com/TicketsBot/database"
-	"github.com/TicketsBot/worker/bot/command/registry"
-	"github.com/TicketsBot/worker/bot/dbclient"
 )
 
 func CanClose(ctx context.Context, cmd registry.CommandContext, ticket database.Ticket) bool {

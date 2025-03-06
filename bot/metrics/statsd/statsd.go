@@ -1,10 +1,11 @@
 package statsd
 
 import (
-	"go.uber.org/atomic"
-	stats "gopkg.in/alexcesaro/statsd.v2"
 	"sync"
 	"time"
+
+	"go.uber.org/atomic"
+	stats "gopkg.in/alexcesaro/statsd.v2"
 )
 
 type StatsdClient struct {

@@ -1,7 +1,7 @@
 package utils
 
 import (
-	"github.com/TicketsBot/worker/bot/errorcontext"
+	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/errorcontext"
 	"github.com/rxdn/gdl/gateway/payloads/events"
 )
 

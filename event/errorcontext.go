@@ -1,10 +1,11 @@
 package event
 
 import (
-	"github.com/TicketsBot/worker/bot/utils"
-	"github.com/rxdn/gdl/objects/interaction"
 	"strconv"
 	"time"
+
+	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/utils"
+	"github.com/rxdn/gdl/objects/interaction"
 )
 
 type InteractionErrorContext struct {

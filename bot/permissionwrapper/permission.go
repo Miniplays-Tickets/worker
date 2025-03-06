@@ -2,6 +2,7 @@ package permissionwrapper
 
 import (
 	"errors"
+
 	"github.com/TicketsBot/common/sentry"
 	"github.com/TicketsBot/worker"
 	"github.com/rxdn/gdl/objects/channel"

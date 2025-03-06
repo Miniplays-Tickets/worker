@@ -2,8 +2,9 @@ package utils
 
 import (
 	"fmt"
-	"github.com/rxdn/gdl/objects/interaction"
 	"strconv"
+
+	"github.com/rxdn/gdl/objects/interaction"
 )
 
 func ButtonInteractionUser(data interaction.MessageComponentInteraction) uint64 {

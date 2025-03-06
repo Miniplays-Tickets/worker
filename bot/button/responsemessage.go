@@ -2,12 +2,13 @@ package button
 
 import (
 	"context"
-	"github.com/TicketsBot/worker"
-	"github.com/TicketsBot/worker/bot/command"
-	"github.com/TicketsBot/worker/bot/utils"
+	"time"
+
+	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/command"
+	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/utils"
+	"github.com/Dev-Miniplays/Ticketsv2-worker"
 	"github.com/rxdn/gdl/objects/interaction"
 	"github.com/rxdn/gdl/rest"
-	"time"
 )
 
 type ResponseMessage struct {
@@ -22,7 +23,7 @@ func (r ResponseMessage) Build() interface{} {
 	return interaction.NewResponseChannelMessage(r.Data.IntoApplicationCommandData())
 }
 
-func (r ResponseMessage) HandleDeferred(interactionData interaction.InteractionMetadata, worker *worker.Context) error {
+func (r ResponseMessage) HandleDeferred(interactionData interaction.InteractionMetadata, worker *Ticketsv2-worker.Context) error {
 	if time.Now().Sub(utils.SnowflakeToTime(interactionData.Id)) > time.Minute*14 {
 		return nil
 	}

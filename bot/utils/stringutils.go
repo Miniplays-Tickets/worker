@@ -1,9 +1,10 @@
 package utils
 
 import (
-	"golang.org/x/exp/constraints"
 	"math/rand"
 	"strings"
+
+	"golang.org/x/exp/constraints"
 )
 
 type Number interface {

@@ -2,6 +2,7 @@ package event
 
 import (
 	"context"
+
 	"github.com/TicketsBot/common/eventforwarding"
 	"github.com/TicketsBot/common/rpc"
 	"github.com/TicketsBot/worker"

@@ -2,22 +2,23 @@ package tickets
 
 import (
 	"fmt"
+	"strings"
+	"time"
+
+	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/command"
+	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/command/registry"
+	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/customisation"
+	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/dbclient"
+	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/utils"
+	"github.com/Dev-Miniplays/Ticketsv2-worker/i18n"
 	"github.com/TicketsBot/common/model"
 	"github.com/TicketsBot/common/permission"
 	"github.com/TicketsBot/common/premium"
 	"github.com/TicketsBot/database"
-	"github.com/TicketsBot/worker/bot/command"
-	"github.com/TicketsBot/worker/bot/command/registry"
-	"github.com/TicketsBot/worker/bot/customisation"
-	"github.com/TicketsBot/worker/bot/dbclient"
-	"github.com/TicketsBot/worker/bot/utils"
-	"github.com/TicketsBot/worker/i18n"
 	"github.com/rxdn/gdl/objects/channel/embed"
 	"github.com/rxdn/gdl/objects/channel/message"
 	"github.com/rxdn/gdl/objects/interaction"
 	"github.com/rxdn/gdl/objects/interaction/component"
-	"strings"
-	"time"
 )
 
 type CloseRequestCommand struct {
@@ -32,8 +33,8 @@ func (c CloseRequestCommand) Properties() registry.Properties {
 		Category:        command.Tickets,
 		InteractionOnly: true,
 		Arguments: command.Arguments(
-			command.NewOptionalArgument("close_delay", "Hours to close the ticket in if the user does not respond", interaction.OptionTypeInteger, "infallible"),
-			command.NewOptionalAutocompleteableArgument("reason", "The reason the ticket was closed", interaction.OptionTypeString, "infallible", c.ReasonAutoCompleteHandler),
+			command.NewOptionalArgument("close_delay", "Stunden in denen das Ticket geschlossen wird wenn der User nicht reagiert", interaction.OptionTypeInteger, "infallible"),
+			command.NewOptionalAutocompleteableArgument("reason", "Der Grund weshalb das Ticket geschlossen wurde", interaction.OptionTypeString, "infallible", c.ReasonAutoCompleteHandler),
 		),
 		Timeout: time.Second * 5,
 	}

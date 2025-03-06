@@ -5,8 +5,9 @@ import (
 	"encoding/json"
 	"flag"
 	"fmt"
-	"github.com/TicketsBot/worker/bot/command/manager"
-	"github.com/TicketsBot/worker/i18n"
+
+	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/command/manager"
+	"github.com/Dev-Miniplays/Ticketsv2-worker/i18n"
 	"github.com/rxdn/gdl/objects/interaction"
 	"github.com/rxdn/gdl/rest"
 )

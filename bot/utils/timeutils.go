@@ -19,7 +19,7 @@ func FormatDateTime(time time.Time) string {
 
 func FormatNullableTime(duration *time.Duration) string {
 	if duration == nil {
-		return "No data"
+		return "Keine Daten"
 	} else {
 		return FormatTime(*duration)
 	}

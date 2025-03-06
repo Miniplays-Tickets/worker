@@ -1,7 +1,7 @@
 package utils
 
 import (
-	"github.com/TicketsBot/worker/config"
+	"github.com/Dev-Miniplays/Ticketsv2-worker/config"
 )
 
 func IsBotAdmin(id uint64) bool {

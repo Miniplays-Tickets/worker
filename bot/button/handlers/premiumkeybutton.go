@@ -1,15 +1,16 @@
 package handlers
 
 import (
-	"github.com/TicketsBot/common/permission"
-	"github.com/TicketsBot/worker/bot/button"
-	"github.com/TicketsBot/worker/bot/button/registry"
-	"github.com/TicketsBot/worker/bot/button/registry/matcher"
-	"github.com/TicketsBot/worker/bot/command/context"
-	"github.com/TicketsBot/worker/bot/customisation"
-	prem "github.com/TicketsBot/worker/bot/premium"
-	"github.com/TicketsBot/worker/i18n"
 	"time"
+
+	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/button"
+	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/button/registry"
+	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/button/registry/matcher"
+	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/command/context"
+	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/customisation"
+	prem "github.com/Dev-Miniplays/Ticketsv2-worker/bot/premium"
+	"github.com/Dev-Miniplays/Ticketsv2-worker/i18n"
+	"github.com/TicketsBot/common/permission"
 )
 
 type PremiumKeyButtonHandler struct{}

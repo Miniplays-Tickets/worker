@@ -3,8 +3,9 @@ package redis
 import (
 	"context"
 	"fmt"
-	"github.com/go-redsync/redsync/v4"
 	"time"
+
+	"github.com/go-redsync/redsync/v4"
 )
 
 type Mutex interface {

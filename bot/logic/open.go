@@ -8,20 +8,20 @@ import (
 	"strings"
 	"time"
 
+	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/command"
+	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/command/registry"
+	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/customisation"
+	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/dbclient"
+	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/metrics/prometheus"
+	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/metrics/statsd"
+	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/redis"
+	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/utils"
+	"github.com/Dev-Miniplays/Ticketsv2-worker/i18n"
 	permcache "github.com/TicketsBot/common/permission"
 	"github.com/TicketsBot/common/premium"
 	"github.com/TicketsBot/common/sentry"
 	"github.com/TicketsBot/database"
 	"github.com/TicketsBot/worker"
-	"github.com/TicketsBot/worker/bot/command"
-	"github.com/TicketsBot/worker/bot/command/registry"
-	"github.com/TicketsBot/worker/bot/customisation"
-	"github.com/TicketsBot/worker/bot/dbclient"
-	"github.com/TicketsBot/worker/bot/metrics/prometheus"
-	"github.com/TicketsBot/worker/bot/metrics/statsd"
-	"github.com/TicketsBot/worker/bot/redis"
-	"github.com/TicketsBot/worker/bot/utils"
-	"github.com/TicketsBot/worker/i18n"
 	"github.com/rxdn/gdl/objects/channel"
 	"github.com/rxdn/gdl/objects/channel/message"
 	"github.com/rxdn/gdl/objects/interaction/component"
@@ -1066,15 +1066,15 @@ func buildJoinThreadMessage(
 		panelName = panel.Title
 	}
 
-	title := "Join Ticket"
+	title := "Ticket Beitreten"
 	if fromReopen {
-		title = "Ticket Reopened"
+		title = "Ticket wieder Geöffnet"
 	}
 
-	e := utils.BuildEmbedRaw(customisation.GetColourOrDefault(ctx, guildId, colour), title, "A ticket has been opened. Press the button below to join it.", nil, premiumTier)
-	e.AddField(customisation.PrefixWithEmoji("Opened By", customisation.EmojiOpen, !worker.IsWhitelabel), customisation.PrefixWithEmoji(fmt.Sprintf("<@%d>", openerId), customisation.EmojiBulletLine, !worker.IsWhitelabel), true)
+	e := utils.BuildEmbedRaw(customisation.GetColourOrDefault(ctx, guildId, colour), title, "Ein Ticket wurde geöffnet. Drücke den Knopf unten um dem Ticket beizutreten.", nil, premiumTier)
+	e.AddField(customisation.PrefixWithEmoji("Geöffnet von", customisation.EmojiOpen, !worker.IsWhitelabel), customisation.PrefixWithEmoji(fmt.Sprintf("<@%d>", openerId), customisation.EmojiBulletLine, !worker.IsWhitelabel), true)
 	e.AddField(customisation.PrefixWithEmoji("Panel", customisation.EmojiPanel, !worker.IsWhitelabel), customisation.PrefixWithEmoji(panelName, customisation.EmojiBulletLine, !worker.IsWhitelabel), true)
-	e.AddField(customisation.PrefixWithEmoji("Staff In Ticket", customisation.EmojiStaff, !worker.IsWhitelabel), customisation.PrefixWithEmoji(strconv.Itoa(len(staffMembers)), customisation.EmojiBulletLine, !worker.IsWhitelabel), true)
+	e.AddField(customisation.PrefixWithEmoji("Teammitglieder im Ticket", customisation.EmojiStaff, !worker.IsWhitelabel), customisation.PrefixWithEmoji(strconv.Itoa(len(staffMembers)), customisation.EmojiBulletLine, !worker.IsWhitelabel), true)
 
 	if len(staffMembers) > 0 {
 		var mentions []string // dynamic length
@@ -1090,14 +1090,14 @@ func buildJoinThreadMessage(
 			charCount += len(mention) + 1 // +1 for space
 		}
 
-		e.AddField(customisation.PrefixWithEmoji("Staff Members", customisation.EmojiStaff, !worker.IsWhitelabel), customisation.PrefixWithEmoji(strings.Join(mentions, " "), customisation.EmojiBulletLine, !worker.IsWhitelabel), false)
+		e.AddField(customisation.PrefixWithEmoji("Teammitglieder", customisation.EmojiStaff, !worker.IsWhitelabel), customisation.PrefixWithEmoji(strings.Join(mentions, " "), customisation.EmojiBulletLine, !worker.IsWhitelabel), false)
 	}
 
 	return command.MessageResponse{
 		Embeds: utils.Slice(e),
 		Components: utils.Slice(component.BuildActionRow(
 			component.BuildButton(component.Button{
-				Label:    "Join Ticket",
+				Label:    "Ticket Betreten",
 				CustomId: fmt.Sprintf("join_thread_%d", ticketId),
 				Style:    component.ButtonStylePrimary,
 				Emoji:    utils.BuildEmoji("➕"),
