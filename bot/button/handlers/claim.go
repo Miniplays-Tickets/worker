@@ -13,7 +13,16 @@ import (
 	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/logic"
 	"github.com/Dev-Miniplays/Ticketsv2-worker/i18n"
 	"github.com/TicketsBot-cloud/common/permission"
+	"github.com/rxdn/gdl/objects/interaction/component"
 )
+
+type ClaimHandler struct{}
+
+func (h *ClaimHandler) Matcher() matcher.Matcher {
+	return &matcher.SimpleMatcher{
+		CustomId: "claim",
+	}
+}
 
 func (h *ClaimHandler) Properties() registry.Properties {
 	return registry.Properties{
