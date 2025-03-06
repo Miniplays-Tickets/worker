@@ -4,13 +4,13 @@ import (
 	"context"
 	"time"
 
+	"github.com/Dev-Miniplays/Ticketsv2-worker"
 	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/dbclient"
 	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/errorcontext"
 	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/logic"
 	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/utils"
-	"github.com/TicketsBot/common/sentry"
-	"github.com/TicketsBot/database"
-	"github.com/TicketsBot/worker"
+	"github.com/TicketsBot-cloud/common/sentry"
+	"github.com/TicketsBot-cloud/database"
 	"github.com/rxdn/gdl/gateway/payloads/events"
 )
 
@@ -61,7 +61,8 @@ func OnThreadMembersUpdate(worker *worker.Context, e events.ThreadMembersUpdate)
 		}
 
 		if settings.TicketNotificationChannel != nil {
-			data := logic.BuildJoinThreadMessage(ctx, worker, ticket.GuildId, ticket.UserId, ticket.Id, panel, threadStaff, premiumTier)
+			name, _ := logic.GenerateChannelName(ctx, worker, panel, ticket.GuildId, ticket.Id, ticket.UserId, nil)
+			data := logic.BuildJoinThreadMessage(ctx, worker, ticket.GuildId, ticket.UserId, name, ticket.Id, panel, threadStaff, premiumTier)
 			if _, err := worker.EditMessage(*settings.TicketNotificationChannel, *ticket.JoinMessageId, data.IntoEditMessageData()); err != nil {
 				sentry.ErrorWithContext(err, errorcontext.WorkerErrorContext{Guild: e.GuildId})
 			}

@@ -16,8 +16,8 @@ import (
 	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/logic"
 	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/utils"
 	"github.com/Dev-Miniplays/Ticketsv2-worker/i18n"
-	"github.com/TicketsBot/common/premium"
-	"github.com/TicketsBot/database"
+	"github.com/TicketsBot-cloud/common/premium"
+	"github.com/TicketsBot-cloud/database"
 )
 
 type ExitSurveySubmitHandler struct{}

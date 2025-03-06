@@ -12,7 +12,7 @@ import (
 	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/logic"
 	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/utils"
 	"github.com/Dev-Miniplays/Ticketsv2-worker/i18n"
-	permcache "github.com/TicketsBot/common/permission"
+	permcache "github.com/TicketsBot-cloud/common/permission"
 	"github.com/rxdn/gdl/objects/channel"
 	"github.com/rxdn/gdl/objects/channel/embed"
 	"github.com/rxdn/gdl/objects/interaction"

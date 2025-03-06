@@ -3,6 +3,7 @@ package messagequeue
 import (
 	"context"
 
+	"github.com/Dev-Miniplays/Ticketsv2-worker"
 	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/cache"
 	cmdcontext "github.com/Dev-Miniplays/Ticketsv2-worker/bot/command/context"
 	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/constants"
@@ -12,9 +13,8 @@ import (
 	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/redis"
 	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/utils"
 	"github.com/Dev-Miniplays/Ticketsv2-worker/config"
-	"github.com/TicketsBot/common/closerelay"
-	"github.com/TicketsBot/common/sentry"
-	"github.com/TicketsBot/worker"
+	"github.com/TicketsBot-cloud/common/closerelay"
+	"github.com/TicketsBot-cloud/common/sentry"
 )
 
 // TODO: Make this good

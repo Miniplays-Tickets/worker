@@ -2,7 +2,7 @@ package command
 
 import (
 	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/redis"
-	"github.com/TicketsBot/worker"
+	"github.com/Dev-Miniplays/Ticketsv2-worker"
 )
 
 func LoadCommandIds(worker *worker.Context, botId uint64) (map[string]uint64, error) {

@@ -5,12 +5,12 @@ import (
 	"errors"
 	"fmt"
 
+	"github.com/Dev-Miniplays/Ticketsv2-worker"
 	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/command/registry"
 	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/customisation"
 	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/dbclient"
 	"github.com/Dev-Miniplays/Ticketsv2-worker/i18n"
-	"github.com/TicketsBot/database"
-	"github.com/TicketsBot/worker"
+	"github.com/TicketsBot-cloud/database"
 	"github.com/rxdn/gdl/objects/channel"
 	"github.com/rxdn/gdl/permission"
 	"github.com/rxdn/gdl/rest"
@@ -54,7 +54,7 @@ func ClaimTicket(ctx context.Context, cmd registry.CommandContext, ticket databa
 
 	// If newOverwrites = nil, no changes to permissions should be made
 	if newOverwrites != nil {
-		channelName, err := GenerateChannelName(ctx, cmd, panel, ticket.Id, ticket.UserId, &userId)
+		channelName, err := GenerateChannelName(ctx, cmd.Worker(), panel, ticket.GuildId, ticket.Id, ticket.UserId, &userId)
 		if err != nil {
 			return err
 		}

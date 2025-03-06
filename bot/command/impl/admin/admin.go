@@ -4,7 +4,7 @@ import (
 	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/command"
 	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/command/registry"
 	"github.com/Dev-Miniplays/Ticketsv2-worker/i18n"
-	"github.com/TicketsBot/common/permission"
+	"github.com/TicketsBot-cloud/common/permission"
 	"github.com/rxdn/gdl/objects/interaction"
 )
 

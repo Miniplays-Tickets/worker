@@ -5,7 +5,7 @@ import (
 	"fmt"
 
 	"github.com/Dev-Miniplays/Ticketsv2-worker/config"
-	"github.com/TicketsBot/database"
+	"github.com/TicketsBot-cloud/database"
 	"github.com/jackc/pgx/v4"
 	"github.com/jackc/pgx/v4/pgxpool"
 	"go.uber.org/zap"

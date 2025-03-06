@@ -8,6 +8,7 @@ import (
 	"strings"
 	"time"
 
+	"github.com/Dev-Miniplays/Ticketsv2-worker"
 	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/command"
 	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/command/registry"
 	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/customisation"
@@ -17,11 +18,10 @@ import (
 	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/redis"
 	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/utils"
 	"github.com/Dev-Miniplays/Ticketsv2-worker/i18n"
-	permcache "github.com/TicketsBot/common/permission"
-	"github.com/TicketsBot/common/premium"
-	"github.com/TicketsBot/common/sentry"
-	"github.com/TicketsBot/database"
-	"github.com/TicketsBot/worker"
+	permcache "github.com/TicketsBot-cloud/common/permission"
+	"github.com/TicketsBot-cloud/common/premium"
+	"github.com/TicketsBot-cloud/common/sentry"
+	"github.com/TicketsBot-cloud/database"
 	"github.com/rxdn/gdl/objects/channel"
 	"github.com/rxdn/gdl/objects/channel/message"
 	"github.com/rxdn/gdl/objects/interaction/component"
@@ -273,7 +273,7 @@ func OpenTicket(ctx context.Context, cmd registry.InteractionContext, panel *dat
 	}
 
 	span = sentry.StartSpan(rootSpan.Context(), "Generate channel name")
-	name, err := GenerateChannelName(ctx, cmd, panel, ticketId, cmd.UserId(), nil)
+	name, err := GenerateChannelName(ctx, cmd.Worker(), panel, cmd.GuildId(), ticketId, cmd.UserId(), nil)
 	if err != nil {
 		cmd.HandleError(err)
 		return database.Ticket{}, err
@@ -308,7 +308,7 @@ func OpenTicket(ctx context.Context, cmd registry.InteractionContext, panel *dat
 			span := sentry.StartSpan(rootSpan.Context(), "Send message to ticket notification channel")
 
 			buildSpan := sentry.StartSpan(span.Context(), "Build ticket notification message")
-			data := BuildJoinThreadMessage(ctx, cmd.Worker(), cmd.GuildId(), cmd.UserId(), ticketId, panel, nil, cmd.PremiumTier())
+			data := BuildJoinThreadMessage(ctx, cmd.Worker(), cmd.GuildId(), cmd.UserId(), name, ticketId, panel, nil, cmd.PremiumTier())
 			buildSpan.Finish()
 
 			// TODO: Check if channel exists
@@ -506,6 +506,18 @@ func OpenTicket(ctx context.Context, cmd registry.InteractionContext, panel *dat
 			} else {
 				if shouldMentionUser {
 					content += fmt.Sprintf("<@%d>", cmd.UserId())
+				}
+			}
+
+			// here
+			span = sentry.StartSpan(rootSpan.Context(), "Get panel here mention setting from database")
+			shouldMentionHere, err := dbclient.Client.PanelHereMention.ShouldMentionHere(ctx, panel.PanelId)
+			span.Finish()
+			if err != nil {
+				return err
+			} else {
+				if shouldMentionHere {
+					content += "@here"
 				}
 			}
 		}
@@ -927,25 +939,20 @@ func GetIntegrationRoleId(rootCtx context.Context, worker *worker.Context, guild
 	return nil, nil
 }
 
-func GenerateChannelName(ctx context.Context, cmd registry.CommandContext, panel *database.Panel, ticketId int, openerId uint64, claimer *uint64) (string, error) {
+func GenerateChannelName(ctx context.Context, worker *worker.Context, panel *database.Panel, guildId uint64, ticketId int, openerId uint64, claimer *uint64) (string, error) {
 	// Create ticket name
 	var name string
 
 	// Use server default naming scheme
 	if panel == nil || panel.NamingScheme == nil {
-		namingScheme, err := dbclient.Client.NamingScheme.Get(ctx, cmd.GuildId())
+		namingScheme, err := dbclient.Client.NamingScheme.Get(ctx, guildId)
 		if err != nil {
 			return "", err
 		}
 
-		strTicket := strings.ToLower(cmd.GetMessage(i18n.Ticket))
+		strTicket := strings.ToLower(i18n.GetMessageFromGuild(guildId, i18n.Ticket))
 		if namingScheme == database.Username {
-			var user user.User
-			if cmd.UserId() == openerId {
-				user, err = cmd.User()
-			} else {
-				user, err = cmd.Worker().GetUser(openerId)
-			}
+			user, err := worker.GetUser(openerId)
 
 			if err != nil {
 				return "", err
@@ -957,7 +964,7 @@ func GenerateChannelName(ctx context.Context, cmd registry.CommandContext, panel
 		}
 	} else {
 		var err error
-		name, err = doSubstitutions(cmd, *panel.NamingScheme, openerId, []Substitutor{
+		name, err = doSubstitutions(worker, *panel.NamingScheme, openerId, guildId, []Substitutor{
 			// %id%
 			NewSubstitutor("id", false, false, func(user user.User, member member.Member) string {
 				return strconv.Itoa(ticketId)
@@ -1023,24 +1030,26 @@ func BuildJoinThreadMessage(
 	ctx context.Context,
 	worker *worker.Context,
 	guildId, openerId uint64,
+	name string,
 	ticketId int,
 	panel *database.Panel,
 	staffMembers []uint64,
 	premiumTier premium.PremiumTier,
 ) command.MessageResponse {
-	return buildJoinThreadMessage(ctx, worker, guildId, openerId, ticketId, panel, staffMembers, premiumTier, false)
+	return buildJoinThreadMessage(ctx, worker, guildId, openerId, name, ticketId, panel, staffMembers, premiumTier, false)
 }
 
 func BuildThreadReopenMessage(
 	ctx context.Context,
 	worker *worker.Context,
 	guildId, openerId uint64,
+	name string,
 	ticketId int,
 	panel *database.Panel,
 	staffMembers []uint64,
 	premiumTier premium.PremiumTier,
 ) command.MessageResponse {
-	return buildJoinThreadMessage(ctx, worker, guildId, openerId, ticketId, panel, staffMembers, premiumTier, true)
+	return buildJoinThreadMessage(ctx, worker, guildId, openerId, name, ticketId, panel, staffMembers, premiumTier, true)
 }
 
 // TODO: Translations
@@ -1048,6 +1057,7 @@ func buildJoinThreadMessage(
 	ctx context.Context,
 	worker *worker.Context,
 	guildId, openerId uint64,
+	name string,
 	ticketId int,
 	panel *database.Panel,
 	staffMembers []uint64,

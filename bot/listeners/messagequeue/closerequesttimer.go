@@ -11,9 +11,9 @@ import (
 	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/metrics/statsd"
 	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/redis"
 	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/utils"
-	"github.com/TicketsBot/common/closerequest"
-	"github.com/TicketsBot/common/sentry"
-	"github.com/TicketsBot/database"
+	"github.com/TicketsBot-cloud/common/closerequest"
+	"github.com/TicketsBot-cloud/common/sentry"
+	"github.com/TicketsBot-cloud/database"
 )
 
 func ListenCloseRequestTimer() {

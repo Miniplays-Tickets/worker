@@ -3,9 +3,9 @@ package event
 import (
 	"context"
 
-	"github.com/TicketsBot/common/eventforwarding"
-	"github.com/TicketsBot/common/rpc"
-	"github.com/TicketsBot/worker"
+	"github.com/Dev-Miniplays/Ticketsv2-worker"
+	"github.com/TicketsBot-cloud/common/eventforwarding"
+	"github.com/TicketsBot-cloud/common/rpc"
 	"github.com/rxdn/gdl/cache"
 	"go.uber.org/zap"
 )

@@ -8,7 +8,7 @@ import (
 	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/customisation"
 	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/dbclient"
 	"github.com/Dev-Miniplays/Ticketsv2-worker/i18n"
-	"github.com/TicketsBot/common/permission"
+	"github.com/TicketsBot-cloud/common/permission"
 	"github.com/rxdn/gdl/objects/channel"
 	"github.com/rxdn/gdl/objects/interaction"
 )

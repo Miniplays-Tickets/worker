@@ -11,8 +11,8 @@ import (
 	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/logic"
 	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/utils"
 	"github.com/Dev-Miniplays/Ticketsv2-worker/i18n"
-	"github.com/TicketsBot/common/permission"
-	"github.com/TicketsBot/common/sentry"
+	"github.com/TicketsBot-cloud/common/permission"
+	"github.com/TicketsBot-cloud/common/sentry"
 	"github.com/rxdn/gdl/objects/interaction"
 )
 

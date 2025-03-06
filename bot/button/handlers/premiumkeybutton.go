@@ -10,7 +10,7 @@ import (
 	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/customisation"
 	prem "github.com/Dev-Miniplays/Ticketsv2-worker/bot/premium"
 	"github.com/Dev-Miniplays/Ticketsv2-worker/i18n"
-	"github.com/TicketsBot/common/permission"
+	"github.com/TicketsBot-cloud/common/permission"
 )
 
 type PremiumKeyButtonHandler struct{}

@@ -12,17 +12,7 @@ import (
 	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/dbclient"
 	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/logic"
 	"github.com/Dev-Miniplays/Ticketsv2-worker/i18n"
-	"github.com/TicketsBot/common/permission"
-	"github.com/rxdn/gdl/objects/interaction/component"
-)
-
-type ClaimHandler struct{}
-
-func (h *ClaimHandler) Matcher() matcher.Matcher {
-	return &matcher.SimpleMatcher{
-		CustomId: "claim",
-	}
-}
+	"github.com/TicketsBot-cloud/common/permission"
 
 func (h *ClaimHandler) Properties() registry.Properties {
 	return registry.Properties{

@@ -11,7 +11,7 @@ import (
 	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/dbclient"
 	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/logic"
 	"github.com/Dev-Miniplays/Ticketsv2-worker/i18n"
-	"github.com/TicketsBot/common/sentry"
+	"github.com/TicketsBot-cloud/common/sentry"
 )
 
 type MultiPanelHandler struct{}

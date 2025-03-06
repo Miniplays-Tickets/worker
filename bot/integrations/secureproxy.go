@@ -10,7 +10,7 @@ import (
 	"io"
 	"net/http"
 
-	"github.com/TicketsBot/common/sentry"
+	"github.com/TicketsBot-cloud/common/sentry"
 )
 
 type SecureProxyClient struct {

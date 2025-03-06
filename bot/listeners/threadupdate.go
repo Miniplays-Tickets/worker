@@ -4,15 +4,15 @@ import (
 	"context"
 	"time"
 
+	"github.com/Dev-Miniplays/Ticketsv2-worker"
 	cmdcontext "github.com/Dev-Miniplays/Ticketsv2-worker/bot/command/context"
 	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/constants"
 	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/dbclient"
 	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/errorcontext"
 	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/logic"
 	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/utils"
-	"github.com/TicketsBot/common/sentry"
-	"github.com/TicketsBot/database"
-	"github.com/TicketsBot/worker"
+	"github.com/TicketsBot-cloud/common/sentry"
+	"github.com/TicketsBot-cloud/database"
 	"github.com/rxdn/gdl/gateway/payloads/events"
 )
 
@@ -73,7 +73,8 @@ func OnThreadUpdate(worker *worker.Context, e events.ThreadUpdate) {
 				return
 			}
 
-			data := logic.BuildThreadReopenMessage(ctx, worker, ticket.GuildId, ticket.UserId, ticket.Id, panel, staffCount, premiumTier)
+			name, _ := logic.GenerateChannelName(ctx, worker, panel, ticket.GuildId, ticket.Id, ticket.UserId, nil)
+			data := logic.BuildThreadReopenMessage(ctx, worker, ticket.GuildId, ticket.UserId, name, ticket.Id, panel, staffCount, premiumTier)
 			msg, err := worker.CreateMessageComplex(*settings.TicketNotificationChannel, data.IntoCreateMessageData())
 			if err != nil {
 				sentry.ErrorWithContext(err, errorcontext.WorkerErrorContext{Guild: e.GuildId})

@@ -11,8 +11,8 @@ import (
 	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/metrics/statsd"
 	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/redis"
 	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/utils"
-	"github.com/TicketsBot/common/autoclose"
-	"github.com/TicketsBot/common/sentry"
+	"github.com/TicketsBot-cloud/common/autoclose"
+	"github.com/TicketsBot-cloud/common/sentry"
 	gdlUtils "github.com/rxdn/gdl/utils"
 )
 

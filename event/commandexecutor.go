@@ -7,6 +7,7 @@ import (
 	"runtime/debug"
 	"time"
 
+	"github.com/Dev-Miniplays/Ticketsv2-worker"
 	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/blacklist"
 	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/command"
 	cmdcontext "github.com/Dev-Miniplays/Ticketsv2-worker/bot/command/context"
@@ -19,10 +20,9 @@ import (
 	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/utils"
 	"github.com/Dev-Miniplays/Ticketsv2-worker/config"
 	"github.com/Dev-Miniplays/Ticketsv2-worker/i18n"
-	"github.com/TicketsBot/common/permission"
-	"github.com/TicketsBot/common/premium"
-	"github.com/TicketsBot/common/sentry"
-	"github.com/TicketsBot/worker"
+	"github.com/TicketsBot-cloud/common/permission"
+	"github.com/TicketsBot-cloud/common/premium"
+	"github.com/TicketsBot-cloud/common/sentry"
 	"github.com/rxdn/gdl/objects/interaction"
 	"golang.org/x/sync/errgroup"
 )

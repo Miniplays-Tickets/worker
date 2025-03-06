@@ -9,7 +9,7 @@ import (
 
 	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/cache"
 	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/dbclient"
-	"github.com/TicketsBot/common/sentry"
+	"github.com/TicketsBot-cloud/common/sentry"
 	"github.com/jackc/pgx/v4"
 )
 

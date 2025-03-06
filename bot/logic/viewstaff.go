@@ -8,7 +8,7 @@ import (
 	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/command/registry"
 	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/customisation"
 	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/dbclient"
-	"github.com/TicketsBot/common/sentry"
+	"github.com/TicketsBot-cloud/common/sentry"
 	"github.com/rxdn/gdl/objects/channel/embed"
 )
 

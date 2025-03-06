@@ -12,8 +12,8 @@ import (
 	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/dbclient"
 	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/utils"
 	"github.com/Dev-Miniplays/Ticketsv2-worker/i18n"
-	"github.com/TicketsBot/common/model"
-	"github.com/TicketsBot/common/permission"
+	"github.com/TicketsBot-cloud/common/model"
+	"github.com/TicketsBot-cloud/common/permission"
 	"github.com/google/uuid"
 )
 

@@ -3,7 +3,7 @@ package registry
 import (
 	"time"
 
-	"github.com/TicketsBot/common/permission"
+	"github.com/TicketsBot-cloud/common/permission"
 )
 
 type Properties struct {

@@ -7,7 +7,7 @@ import (
 	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/command/registry"
 	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/dbclient"
 	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/utils"
-	"github.com/TicketsBot/database"
+	"github.com/TicketsBot-cloud/database"
 	"github.com/rxdn/gdl/objects/channel"
 	"github.com/rxdn/gdl/permission"
 	"github.com/rxdn/gdl/rest"

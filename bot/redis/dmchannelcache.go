@@ -6,7 +6,7 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/TicketsBot/common/utils"
+	"github.com/TicketsBot-cloud/common/utils"
 	"github.com/go-redis/redis/v8"
 )
 

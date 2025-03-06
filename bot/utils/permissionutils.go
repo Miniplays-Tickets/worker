@@ -5,8 +5,8 @@ import (
 
 	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/command/registry"
 	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/dbclient"
-	"github.com/TicketsBot/common/permission"
-	"github.com/TicketsBot/database"
+	"github.com/TicketsBot-cloud/common/permission"
+	"github.com/TicketsBot-cloud/database"
 )
 
 func CanClose(ctx context.Context, cmd registry.CommandContext, ticket database.Ticket) bool {

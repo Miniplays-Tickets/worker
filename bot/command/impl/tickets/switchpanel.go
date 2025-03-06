@@ -16,9 +16,9 @@ import (
 	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/redis"
 	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/utils"
 	"github.com/Dev-Miniplays/Ticketsv2-worker/i18n"
-	"github.com/TicketsBot/common/permission"
-	"github.com/TicketsBot/common/sentry"
-	"github.com/TicketsBot/database"
+	"github.com/TicketsBot-cloud/common/permission"
+	"github.com/TicketsBot-cloud/common/sentry"
+	"github.com/TicketsBot-cloud/database"
 	"github.com/rxdn/gdl/objects/channel"
 	"github.com/rxdn/gdl/objects/channel/embed"
 	"github.com/rxdn/gdl/objects/interaction"
@@ -142,7 +142,7 @@ func (SwitchPanelCommand) Execute(ctx *cmdcontext.SlashCommandContext, panelId i
 	}
 
 	// Get new channel name
-	channelName, err := logic.GenerateChannelName(ctx.Context, ctx, &panel, ticket.Id, ticket.UserId, utils.NilIfZero(claimer))
+	channelName, err := logic.GenerateChannelName(ctx.Context, ctx.Worker(), &panel, ticket.GuildId, ticket.Id, ticket.UserId, utils.NilIfZero(claimer))
 	if err != nil {
 		ctx.HandleError(err)
 		return
@@ -176,7 +176,7 @@ func (SwitchPanelCommand) Execute(ctx *cmdcontext.SlashCommandContext, panelId i
 				return
 			}
 
-			msg := logic.BuildJoinThreadMessage(ctx.Context, ctx.Worker(), ctx.GuildId(), ticket.UserId, ticket.Id, &panel, threadStaff, ctx.PremiumTier())
+			msg := logic.BuildJoinThreadMessage(ctx.Context, ctx.Worker(), ctx.GuildId(), ticket.UserId, channelName, ticket.Id, &panel, threadStaff, ctx.PremiumTier())
 			if _, err := ctx.Worker().EditMessage(*settings.TicketNotificationChannel, *ticket.JoinMessageId, msg.IntoEditMessageData()); err != nil {
 				sentry.ErrorWithContext(err, ctx.ToErrorContext()) // Only log
 				return

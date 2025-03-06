@@ -13,7 +13,7 @@ import (
 	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/metrics/prometheus"
 	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/utils"
 	"github.com/Dev-Miniplays/Ticketsv2-worker/config"
-	"github.com/TicketsBot/database"
+	"github.com/TicketsBot-cloud/database"
 )
 
 var (

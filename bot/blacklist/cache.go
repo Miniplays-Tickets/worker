@@ -5,7 +5,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/TicketsBot/worker/bot/dbclient"
+	"github.com/Dev-Miniplays/Ticketsv2-Worker/bot/dbclient"
 	"go.uber.org/zap"
 )
 

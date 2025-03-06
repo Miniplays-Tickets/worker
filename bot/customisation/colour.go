@@ -4,7 +4,7 @@ import (
 	"context"
 
 	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/dbclient"
-	"github.com/TicketsBot/common/sentry"
+	"github.com/TicketsBot-cloud/common/sentry"
 )
 
 type Colour int16
