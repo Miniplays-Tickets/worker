@@ -5,7 +5,7 @@ import (
 	"time"
 
 	"github.com/Dev-Miniplays/Ticketsv2-worker/config"
-	"github.com/TicketsBot-cloud/analytics-client"
+	"github.com/TicketsBot/analytics-client"
 	"go.uber.org/zap"
 )
 

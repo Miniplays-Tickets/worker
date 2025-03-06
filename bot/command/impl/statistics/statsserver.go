@@ -11,7 +11,7 @@ import (
 	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/dbclient"
 	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/utils"
 	"github.com/Dev-Miniplays/Ticketsv2-worker/i18n"
-	"github.com/TicketsBot-cloud/analytics-client"
+	"github.com/TicketsBot/analytics-client"
 	"github.com/TicketsBot-cloud/common/permission"
 	"github.com/getsentry/sentry-go"
 	"github.com/jedib0t/go-pretty/v6/table"

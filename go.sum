@@ -53,6 +53,8 @@ github.com/ClickHouse/clickhouse-go/v2 v2.10.0 h1:0w/A50D5MfsRUYBaV6rLKwZ4LXWKLZ
 github.com/ClickHouse/clickhouse-go/v2 v2.10.0/go.mod h1:teXfZNM90iQ99Jnuht+dxQXCuhDZ8nvvMoTJOFrcmcg=
 github.com/Masterminds/semver/v3 v3.1.1/go.mod h1:VPu/7SZ7ePZ3QOrcuXROw5FAcLl4a0cBrbBpGY/8hQs=
 github.com/ReneKroon/ttlcache v1.6.0/go.mod h1:DG6nbhXKUQhrExfwwLuZUdH7UnRDDRA1IW+nBuCssvs=
+github.com/TicketsBot-cloud/archiverclient v0.0.0-20250206203822-d4f91573ad70 h1:bkTKXS4RRLTOC2UbqRnYObI7uGfyW64mo7dYxx8HN+w=
+github.com/TicketsBot-cloud/archiverclient v0.0.0-20250206203822-d4f91573ad70/go.mod h1:BtS3JYHIuRStuUm909E7IDAwg7aAuiS5CNfIH5Y+Ayw=
 github.com/TicketsBot-cloud/common v0.0.0-20250208140430-b5da1dd487b3 h1:2rpwH5o8negd0BCqWG8xv9r0jh/fYK3P/V3WJ+yFDKs=
 github.com/TicketsBot-cloud/common v0.0.0-20250208140430-b5da1dd487b3/go.mod h1:gn88nKOiWkAgFhhTyuuo+sPFAQEVdTK+P/VXAxOBKNw=
 github.com/TicketsBot-cloud/database v0.0.0-20250306095726-e4915520c1ab h1:Dhdgzp/W58VkgWOzdaUmERMLcHrh58I5wGjH+RZaItA=

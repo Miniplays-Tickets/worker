@@ -1,4 +1,3 @@
-
 module github.com/Dev-Miniplays/Ticketsv2-worker
 
 go 1.23.0
@@ -43,6 +42,7 @@ require (
 	cloud.google.com/go/compute/metadata v0.3.0 // indirect
 	github.com/ClickHouse/ch-go v0.52.1 // indirect
 	github.com/ClickHouse/clickhouse-go/v2 v2.10.0 // indirect
+	github.com/TicketsBot-cloud/archiverclient v0.0.0-20250206203822-d4f91573ad70 // indirect
 	github.com/TicketsBot/common v0.0.0-20241117150316-ff54c97b45c1 // indirect
 	github.com/TicketsBot/logarchiver v0.0.0-20241012220745-5f3ba17a5138 // indirect
 	github.com/TicketsBot/ttlcache v1.6.1-0.20200405150101-acc18e37b261 // indirect
