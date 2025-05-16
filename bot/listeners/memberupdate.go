@@ -4,8 +4,8 @@ import (
 	"context"
 	"time"
 
-	"github.com/Dev-Miniplays/Ticketsv2-worker"
-	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/utils"
+	"github.com/Miniplays-Tickets/worker"
+	"github.com/Miniplays-Tickets/worker/bot/utils"
 	"github.com/TicketsBot-cloud/common/sentry"
 	"github.com/rxdn/gdl/gateway/payloads/events"
 )

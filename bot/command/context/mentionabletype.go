@@ -1,7 +1,7 @@
 package context
 
 import (
-	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/command/registry"
+	"github.com/Miniplays-Tickets/worker/bot/command/registry"
 	"github.com/rxdn/gdl/objects"
 	"github.com/rxdn/gdl/objects/channel"
 )

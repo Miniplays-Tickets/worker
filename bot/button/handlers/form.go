@@ -3,14 +3,14 @@ package handlers
 import (
 	"strings"
 
-	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/button/registry"
-	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/button/registry/matcher"
-	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/command/context"
-	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/constants"
-	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/customisation"
-	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/dbclient"
-	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/logic"
-	"github.com/Dev-Miniplays/Ticketsv2-worker/i18n"
+	"github.com/Miniplays-Tickets/worker/bot/button/registry"
+	"github.com/Miniplays-Tickets/worker/bot/button/registry/matcher"
+	"github.com/Miniplays-Tickets/worker/bot/command/context"
+	"github.com/Miniplays-Tickets/worker/bot/constants"
+	"github.com/Miniplays-Tickets/worker/bot/customisation"
+	"github.com/Miniplays-Tickets/worker/bot/dbclient"
+	"github.com/Miniplays-Tickets/worker/bot/logic"
+	"github.com/Miniplays-Tickets/worker/i18n"
 	"github.com/TicketsBot-cloud/common/sentry"
 	"github.com/TicketsBot-cloud/database"
 )

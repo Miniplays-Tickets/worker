@@ -7,8 +7,8 @@ import (
 	"io/ioutil"
 	"strings"
 
-	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/cache"
-	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/dbclient"
+	"github.com/Miniplays-Tickets/worker/bot/cache"
+	"github.com/Miniplays-Tickets/worker/bot/dbclient"
 	"github.com/TicketsBot-cloud/common/sentry"
 	"github.com/jackc/pgx/v4"
 )

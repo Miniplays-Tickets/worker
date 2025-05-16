@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/Dev-Miniplays/Ticketsv2-worker/config"
+	"github.com/Miniplays-Tickets/worker/config"
 	"github.com/jackc/pgx/v4"
 	"github.com/jackc/pgx/v4/log/logrusadapter"
 	"github.com/jackc/pgx/v4/pgxpool"

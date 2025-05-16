@@ -5,9 +5,9 @@ import (
 	"errors"
 	"sync"
 
-	"github.com/Dev-Miniplays/Ticketsv2-worker"
-	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/dbclient"
-	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/utils"
+	"github.com/Miniplays-Tickets/worker"
+	"github.com/Miniplays-Tickets/worker/bot/dbclient"
+	"github.com/Miniplays-Tickets/worker/bot/utils"
 	"github.com/TicketsBot-cloud/common/collections"
 	"github.com/TicketsBot-cloud/database"
 	"github.com/rxdn/gdl/objects/member"

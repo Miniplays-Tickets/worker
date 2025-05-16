@@ -1,8 +1,8 @@
 package registry
 
 import (
-	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/button/registry/matcher"
-	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/command/context"
+	"github.com/Miniplays-Tickets/worker/bot/button/registry/matcher"
+	"github.com/Miniplays-Tickets/worker/bot/command/context"
 )
 
 type ButtonHandler interface {

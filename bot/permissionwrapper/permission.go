@@ -3,7 +3,7 @@ package permissionwrapper
 import (
 	"errors"
 
-	"github.com/Dev-Miniplays/Ticketsv2-worker"
+	"github.com/Miniplays-Tickets/worker"
 	"github.com/TicketsBot-cloud/common/sentry"
 	"github.com/rxdn/gdl/objects/channel"
 	"github.com/rxdn/gdl/objects/guild"

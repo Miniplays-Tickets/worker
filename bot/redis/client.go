@@ -1,7 +1,7 @@
 package redis
 
 import (
-	"github.com/Dev-Miniplays/Ticketsv2-worker/config"
+	"github.com/Miniplays-Tickets/worker/config"
 	"github.com/go-redis/redis/v8"
 	"github.com/go-redsync/redsync/v4"
 	redsyncredis "github.com/go-redsync/redsync/v4/redis/goredis/v8"

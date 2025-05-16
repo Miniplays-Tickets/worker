@@ -10,10 +10,10 @@ import (
 	"strings"
 	"text/template"
 
-	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/command"
-	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/command/manager"
-	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/command/registry"
-	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/utils"
+	"github.com/Miniplays-Tickets/worker/bot/command"
+	"github.com/Miniplays-Tickets/worker/bot/command/manager"
+	"github.com/Miniplays-Tickets/worker/bot/command/registry"
+	"github.com/Miniplays-Tickets/worker/bot/utils"
 	"github.com/rxdn/gdl/objects/channel"
 	"github.com/rxdn/gdl/objects/interaction"
 )

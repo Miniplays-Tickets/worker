@@ -10,9 +10,9 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/metrics/prometheus"
-	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/utils"
-	"github.com/Dev-Miniplays/Ticketsv2-worker/config"
+	"github.com/Miniplays-Tickets/worker/bot/metrics/prometheus"
+	"github.com/Miniplays-Tickets/worker/bot/utils"
+	"github.com/Miniplays-Tickets/worker/config"
 	"github.com/TicketsBot-cloud/database"
 )
 

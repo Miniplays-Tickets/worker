@@ -3,7 +3,7 @@ package customisation
 import (
 	"context"
 
-	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/dbclient"
+	"github.com/Miniplays-Tickets/worker/bot/dbclient"
 	"github.com/TicketsBot-cloud/common/sentry"
 )
 

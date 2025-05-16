@@ -4,7 +4,7 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/Dev-Miniplays/Ticketsv2-worker/config"
+	"github.com/Miniplays-Tickets/worker/config"
 )
 
 // Twilight's HTTP proxy doesn't support the typical HTTP proxy protocol - instead you send the request directly

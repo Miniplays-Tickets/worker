@@ -5,10 +5,10 @@ import (
 	"errors"
 	"time"
 
-	"github.com/Dev-Miniplays/Ticketsv2-worker"
+	"github.com/Miniplays-Tickets/worker"
+	"github.com/Miniplays-Tickets/worker/bot/dbclient"
+	"github.com/Miniplays-Tickets/worker/config"
 	"github.com/rxdn/gdl/cache"
-	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/dbclient"
-	"github.com/Dev-Miniplays/Ticketsv2-worker/config"
 )
 
 type BaseListener struct {

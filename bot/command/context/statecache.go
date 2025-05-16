@@ -5,8 +5,8 @@ import (
 	"sync"
 	"time"
 
-	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/command/registry"
-	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/dbclient"
+	"github.com/Miniplays-Tickets/worker/bot/command/registry"
+	"github.com/Miniplays-Tickets/worker/bot/dbclient"
 	"github.com/TicketsBot-cloud/database"
 )
 

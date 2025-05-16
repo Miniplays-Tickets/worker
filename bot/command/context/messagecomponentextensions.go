@@ -3,12 +3,12 @@ package context
 import (
 	"context"
 
-	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/button"
-	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/command"
-	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/command/registry"
-	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/customisation"
-	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/utils"
-	"github.com/Dev-Miniplays/Ticketsv2-worker/i18n"
+	"github.com/Miniplays-Tickets/worker/bot/button"
+	"github.com/Miniplays-Tickets/worker/bot/command"
+	"github.com/Miniplays-Tickets/worker/bot/command/registry"
+	"github.com/Miniplays-Tickets/worker/bot/customisation"
+	"github.com/Miniplays-Tickets/worker/bot/utils"
+	"github.com/Miniplays-Tickets/worker/i18n"
 	"github.com/TicketsBot-cloud/common/sentry"
 	"github.com/rxdn/gdl/objects/interaction"
 	"github.com/rxdn/gdl/objects/interaction/component"

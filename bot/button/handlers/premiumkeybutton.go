@@ -3,13 +3,13 @@ package handlers
 import (
 	"time"
 
-	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/button"
-	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/button/registry"
-	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/button/registry/matcher"
-	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/command/context"
-	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/customisation"
-	prem "github.com/Dev-Miniplays/Ticketsv2-worker/bot/premium"
-	"github.com/Dev-Miniplays/Ticketsv2-worker/i18n"
+	"github.com/Miniplays-Tickets/worker/bot/button"
+	"github.com/Miniplays-Tickets/worker/bot/button/registry"
+	"github.com/Miniplays-Tickets/worker/bot/button/registry/matcher"
+	"github.com/Miniplays-Tickets/worker/bot/command/context"
+	"github.com/Miniplays-Tickets/worker/bot/customisation"
+	prem "github.com/Miniplays-Tickets/worker/bot/premium"
+	"github.com/Miniplays-Tickets/worker/i18n"
 	"github.com/TicketsBot-cloud/common/permission"
 )
 

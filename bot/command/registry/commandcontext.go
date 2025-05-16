@@ -1,11 +1,11 @@
 package registry
 
 import (
-	"github.com/Dev-Miniplays/Ticketsv2-worker"
-	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/command"
-	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/customisation"
-	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/errorcontext"
-	"github.com/Dev-Miniplays/Ticketsv2-worker/i18n"
+	"github.com/Miniplays-Tickets/worker"
+	"github.com/Miniplays-Tickets/worker/bot/command"
+	"github.com/Miniplays-Tickets/worker/bot/customisation"
+	"github.com/Miniplays-Tickets/worker/bot/errorcontext"
+	"github.com/Miniplays-Tickets/worker/i18n"
 	permcache "github.com/TicketsBot-cloud/common/permission"
 	"github.com/TicketsBot-cloud/common/premium"
 	"github.com/TicketsBot-cloud/database"

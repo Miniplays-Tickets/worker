@@ -4,13 +4,13 @@ import (
 	"context"
 	"time"
 
-	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/button"
-	cmdcontext "github.com/Dev-Miniplays/Ticketsv2-worker/bot/command/context"
-	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/errorcontext"
-	"github.com/Dev-Miniplays/Ticketsv2-worker/config"
+	"github.com/Miniplays-Tickets/worker"
+	"github.com/Miniplays-Tickets/worker/bot/button"
+	cmdcontext "github.com/Miniplays-Tickets/worker/bot/command/context"
+	"github.com/Miniplays-Tickets/worker/bot/errorcontext"
+	"github.com/Miniplays-Tickets/worker/config"
 	"github.com/TicketsBot-cloud/common/premium"
 	"github.com/TicketsBot-cloud/common/sentry"
-	"github.com/Dev-Miniplays/Ticketsv2-worker"
 	"github.com/rxdn/gdl/objects/interaction"
 )
 

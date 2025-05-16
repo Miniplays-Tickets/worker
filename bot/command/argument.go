@@ -1,7 +1,7 @@
 package command
 
 import (
-	"github.com/Dev-Miniplays/Ticketsv2-worker/i18n"
+	"github.com/Miniplays-Tickets/worker/i18n"
 	"github.com/rxdn/gdl/objects/interaction"
 )
 

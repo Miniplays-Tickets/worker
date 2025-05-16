@@ -4,7 +4,7 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/Dev-Miniplays/Ticketsv2-worker/config"
+	"github.com/Miniplays-Tickets/worker/config"
 	"github.com/TicketsBot-cloud/database"
 	"github.com/jackc/pgx/v4"
 	"github.com/jackc/pgx/v4/pgxpool"

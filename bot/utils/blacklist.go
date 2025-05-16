@@ -3,8 +3,8 @@ package utils
 import (
 	"context"
 
-	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/blacklist"
-	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/dbclient"
+	"github.com/Miniplays-Tickets/worker/bot/blacklist"
+	"github.com/Miniplays-Tickets/worker/bot/dbclient"
 	"github.com/TicketsBot-cloud/common/permission"
 	"github.com/rxdn/gdl/objects/member"
 	"golang.org/x/sync/errgroup"

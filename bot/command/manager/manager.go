@@ -1,15 +1,15 @@
 package manager
 
 import (
-	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/command/impl/admin"
-	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/command/impl/general"
-	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/command/impl/settings"
-	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/command/impl/settings/setup"
-	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/command/impl/statistics"
-	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/command/impl/tags"
-	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/command/impl/tickets"
-	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/command/registry"
-	"github.com/Dev-Miniplays/Ticketsv2-worker/i18n"
+	"github.com/Miniplays-Tickets/worker/bot/command/impl/admin"
+	"github.com/Miniplays-Tickets/worker/bot/command/impl/general"
+	"github.com/Miniplays-Tickets/worker/bot/command/impl/settings"
+	"github.com/Miniplays-Tickets/worker/bot/command/impl/settings/setup"
+	"github.com/Miniplays-Tickets/worker/bot/command/impl/statistics"
+	"github.com/Miniplays-Tickets/worker/bot/command/impl/tags"
+	"github.com/Miniplays-Tickets/worker/bot/command/impl/tickets"
+	"github.com/Miniplays-Tickets/worker/bot/command/registry"
+	"github.com/Miniplays-Tickets/worker/i18n"
 	"github.com/rxdn/gdl/objects/interaction"
 	"github.com/rxdn/gdl/rest"
 )

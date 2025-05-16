@@ -4,9 +4,9 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/command/registry"
-	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/dbclient"
-	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/utils"
+	"github.com/Miniplays-Tickets/worker/bot/command/registry"
+	"github.com/Miniplays-Tickets/worker/bot/dbclient"
+	"github.com/Miniplays-Tickets/worker/bot/utils"
 	"github.com/TicketsBot-cloud/database"
 	"github.com/rxdn/gdl/objects/channel"
 	"github.com/rxdn/gdl/permission"

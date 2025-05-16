@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/Dev-Miniplays/Ticketsv2-worker"
+	"github.com/Miniplays-Tickets/worker"
 	"github.com/rxdn/gdl/objects/member"
 	"github.com/rxdn/gdl/objects/user"
 )

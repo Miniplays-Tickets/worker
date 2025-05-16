@@ -1,9 +1,9 @@
 package settings
 
 import (
-	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/command"
-	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/command/registry"
-	"github.com/Dev-Miniplays/Ticketsv2-worker/i18n"
+	"github.com/Miniplays-Tickets/worker/bot/command"
+	"github.com/Miniplays-Tickets/worker/bot/command/registry"
+	"github.com/Miniplays-Tickets/worker/i18n"
 	"github.com/TicketsBot-cloud/common/permission"
 	"github.com/rxdn/gdl/objects/interaction"
 )

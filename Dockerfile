@@ -5,8 +5,8 @@ RUN go version
 
 RUN apt-get update && apt-get upgrade -y && apt-get install -y ca-certificates git zlib1g-dev
 
-COPY . /go/src/github.com/Dev-Miniplays/Ticketsv2-worker
-WORKDIR /go/src/github.com/Dev-Miniplays/Ticketsv2-worker
+COPY . /go/src/github.com/Miniplays-Tickets/worker
+WORKDIR /go/src/github.com/Miniplays-Tickets/worker
 
 RUN git submodule update --init --recursive --remote
 
@@ -25,8 +25,8 @@ FROM ubuntu:latest
 
 RUN apt-get update && apt-get upgrade -y && apt-get install -y ca-certificates curl
 
-COPY --from=builder /go/src/github.com/Dev-Miniplays/Ticketsv2-worker/locale /srv/worker/locale
-COPY --from=builder /go/src/github.com/Dev-Miniplays/Ticketsv2-worker/main /srv/worker/main
+COPY --from=builder /go/src/github.com/Miniplays-Tickets/worker/locale /srv/worker/locale
+COPY --from=builder /go/src/github.com/Miniplays-Tickets/worker/main /srv/worker/main
 
 RUN chmod +x /srv/worker/main
 

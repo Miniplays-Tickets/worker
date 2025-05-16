@@ -5,9 +5,9 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/Dev-Miniplays/Ticketsv2-worker"
-	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/listeners"
-	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/metrics/prometheus"
+	"github.com/Miniplays-Tickets/worker"
+	"github.com/Miniplays-Tickets/worker/bot/listeners"
+	"github.com/Miniplays-Tickets/worker/bot/metrics/prometheus"
 	"github.com/getsentry/sentry-go"
 	"github.com/rxdn/gdl/gateway/payloads"
 )

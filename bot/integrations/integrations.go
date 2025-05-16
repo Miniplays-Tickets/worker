@@ -1,8 +1,8 @@
 package integrations
 
 import (
-	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/redis"
-	"github.com/Dev-Miniplays/Ticketsv2-worker/config"
+	"github.com/Miniplays-Tickets/worker/bot/redis"
+	"github.com/Miniplays-Tickets/worker/config"
 	"github.com/TicketsBot-cloud/common/integrations/bloxlink"
 	"github.com/TicketsBot-cloud/common/webproxy"
 )

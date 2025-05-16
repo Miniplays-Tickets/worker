@@ -3,7 +3,7 @@ package event
 import (
 	"context"
 
-	"github.com/Dev-Miniplays/Ticketsv2-worker"
+	"github.com/Miniplays-Tickets/worker"
 	"github.com/TicketsBot-cloud/common/eventforwarding"
 	"github.com/TicketsBot-cloud/common/rpc"
 	"github.com/rxdn/gdl/cache"

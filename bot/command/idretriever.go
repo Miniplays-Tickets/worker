@@ -1,8 +1,8 @@
 package command
 
 import (
-	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/redis"
-	"github.com/Dev-Miniplays/Ticketsv2-worker"
+	"github.com/Miniplays-Tickets/worker"
+	"github.com/Miniplays-Tickets/worker/bot/redis"
 )
 
 func LoadCommandIds(worker *worker.Context, botId uint64) (map[string]uint64, error) {

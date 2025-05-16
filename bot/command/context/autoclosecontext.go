@@ -3,13 +3,13 @@ package context
 import (
 	"context"
 
-	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/command"
-	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/command/registry"
-	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/errorcontext"
-	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/utils"
+	"github.com/Miniplays-Tickets/worker"
+	"github.com/Miniplays-Tickets/worker/bot/command"
+	"github.com/Miniplays-Tickets/worker/bot/command/registry"
+	"github.com/Miniplays-Tickets/worker/bot/errorcontext"
+	"github.com/Miniplays-Tickets/worker/bot/utils"
 	permcache "github.com/TicketsBot-cloud/common/permission"
 	"github.com/TicketsBot-cloud/common/premium"
-	"github.com/Dev-Miniplays/Ticketsv2-worker"
 	"github.com/rxdn/gdl/objects/channel"
 	"github.com/rxdn/gdl/objects/channel/message"
 	"github.com/rxdn/gdl/objects/guild"

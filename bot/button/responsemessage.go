@@ -4,9 +4,9 @@ import (
 	"context"
 	"time"
 
-	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/command"
-	"github.com/Dev-Miniplays/Ticketsv2-worker/bot/utils"
-	"github.com/Dev-Miniplays/Ticketsv2-worker"
+	"github.com/Miniplays-Tickets/worker"
+	"github.com/Miniplays-Tickets/worker/bot/command"
+	"github.com/Miniplays-Tickets/worker/bot/utils"
 	"github.com/rxdn/gdl/objects/interaction"
 	"github.com/rxdn/gdl/rest"
 )
