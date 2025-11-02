@@ -11,7 +11,7 @@ import (
 	"github.com/Miniplays-Tickets/worker/bot/utils"
 	"github.com/Miniplays-Tickets/worker/i18n"
 	"github.com/TicketsBot-cloud/common/permission"
-	"github.com/rxdn/gdl/objects/interaction"
+	"github.com/TicketsBot-cloud/gdl/objects/interaction"
 )
 
 type AdminCheckPremiumCommand struct {
@@ -55,5 +55,16 @@ func (AdminCheckPremiumCommand) Execute(ctx registry.CommandContext, raw string)
 		return
 	}
 
-	ctx.ReplyRaw(customisation.Green, ctx.GetMessage(i18n.Admin), fmt.Sprintf("Server Name: `%s`\nOwner: <@%d> `%d`\nPremium Tier: %s\nPremium Source: %s", guild.Name, guild.OwnerId, guild.OwnerId, tier.String(), src))
+	sourceFormatted := string(src)
+	if sourceFormatted == "" {
+		sourceFormatted = "None"
+	}
+	ctx.ReplyWith(command.NewMessageResponseWithComponents(utils.Slice(
+		utils.BuildContainerRaw(
+			ctx,
+			customisation.Orange,
+			"Admin - Premium Check",
+			fmt.Sprintf("**Server Name:** `%s`\n**Owner:** <@%d> `%d`\n**Premium Tier:** `%s`\n**Premium Source:** `%s`", guild.Name, guild.OwnerId, guild.OwnerId, tier.String(), sourceFormatted),
+		),
+	)))
 }

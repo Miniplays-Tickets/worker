@@ -6,7 +6,7 @@ import (
 	"github.com/Miniplays-Tickets/worker/bot/blacklist"
 	"github.com/Miniplays-Tickets/worker/bot/dbclient"
 	"github.com/TicketsBot-cloud/common/permission"
-	"github.com/rxdn/gdl/objects/member"
+	"github.com/TicketsBot-cloud/gdl/objects/member"
 	"golang.org/x/sync/errgroup"
 )
 

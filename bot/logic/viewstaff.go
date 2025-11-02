@@ -9,7 +9,7 @@ import (
 	"github.com/Miniplays-Tickets/worker/bot/customisation"
 	"github.com/Miniplays-Tickets/worker/bot/dbclient"
 	"github.com/TicketsBot-cloud/common/sentry"
-	"github.com/rxdn/gdl/objects/channel/embed"
+	"github.com/TicketsBot-cloud/gdl/objects/channel/embed"
 )
 
 // each msg is

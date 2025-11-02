@@ -7,7 +7,7 @@ import (
 	"github.com/Miniplays-Tickets/worker"
 	"github.com/Miniplays-Tickets/worker/bot/utils"
 	"github.com/TicketsBot-cloud/common/sentry"
-	"github.com/rxdn/gdl/gateway/payloads/events"
+	"github.com/TicketsBot-cloud/gdl/gateway/payloads/events"
 )
 
 // Remove user permissions when they leave

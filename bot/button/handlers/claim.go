@@ -13,7 +13,7 @@ import (
 	"github.com/Miniplays-Tickets/worker/bot/logic"
 	"github.com/Miniplays-Tickets/worker/i18n"
 	"github.com/TicketsBot-cloud/common/permission"
-	"github.com/rxdn/gdl/objects/interaction/component"
+	"github.com/TicketsBot-cloud/gdl/objects/interaction/component"
 )
 
 type ClaimHandler struct{}

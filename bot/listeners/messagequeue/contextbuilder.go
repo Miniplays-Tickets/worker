@@ -7,7 +7,7 @@ import (
 	"github.com/Miniplays-Tickets/worker/bot/dbclient"
 	"github.com/Miniplays-Tickets/worker/config"
 	"github.com/TicketsBot-cloud/database"
-	"github.com/rxdn/gdl/cache"
+	"github.com/TicketsBot-cloud/gdl/cache"
 )
 
 func buildContext(ctx context.Context, ticket database.Ticket, cache *cache.PgCache) (*worker.Context, error) {

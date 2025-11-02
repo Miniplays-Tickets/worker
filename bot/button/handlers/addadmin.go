@@ -18,10 +18,10 @@ import (
 	"github.com/Miniplays-Tickets/worker/bot/utils"
 	"github.com/Miniplays-Tickets/worker/i18n"
 	permcache "github.com/TicketsBot-cloud/common/permission"
-	"github.com/rxdn/gdl/objects/channel"
-	"github.com/rxdn/gdl/permission"
-	"github.com/rxdn/gdl/rest"
-	"github.com/rxdn/gdl/rest/request"
+	"github.com/TicketsBot-cloud/gdl/objects/channel"
+	"github.com/TicketsBot-cloud/gdl/permission"
+	"github.com/TicketsBot-cloud/gdl/rest"
+	"github.com/TicketsBot-cloud/gdl/rest/request"
 )
 
 type AddAdminHandler struct{}
@@ -119,7 +119,14 @@ func (h *AddAdminHandler) Execute(ctx *context.ButtonContext) {
 		return
 	}
 
-	e := utils.BuildEmbed(ctx, customisation.Green, i18n.TitleAddAdmin, i18n.MessageAddAdminSuccess, nil)
+	var mention string
+	if mentionableType == context.MentionableTypeUser {
+		mention = fmt.Sprintf("<@%d>", id)
+	} else {
+		mention = fmt.Sprintf("<@&%d>", id)
+	}
+
+	e := utils.BuildEmbed(ctx, customisation.Green, i18n.TitleAddAdmin, i18n.MessageAddAdminSuccess, nil, mention)
 	ctx.Edit(command.NewEphemeralEmbedMessageResponse(e))
 
 	settings, err := ctx.Settings()

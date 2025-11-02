@@ -7,7 +7,7 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/rxdn/gdl/rest/request"
+	"github.com/TicketsBot-cloud/gdl/rest/request"
 )
 
 func PreRequestHook(_ string, req *http.Request) {

@@ -10,11 +10,12 @@ import (
 	"github.com/Miniplays-Tickets/worker/bot/command/registry"
 	"github.com/Miniplays-Tickets/worker/bot/customisation"
 	"github.com/Miniplays-Tickets/worker/bot/dbclient"
+	"github.com/Miniplays-Tickets/worker/bot/utils"
 	"github.com/Miniplays-Tickets/worker/i18n"
 	"github.com/TicketsBot-cloud/common/permission"
 	"github.com/TicketsBot-cloud/common/sentry"
+	"github.com/TicketsBot-cloud/gdl/objects/interaction"
 	"github.com/google/uuid"
-	"github.com/rxdn/gdl/objects/interaction"
 )
 
 type AdminGenPremiumCommand struct {
@@ -108,7 +109,14 @@ func (AdminGenPremiumCommand) Execute(ctx registry.CommandContext, skuIdRaw stri
 		return
 	}
 
-	ctx.ReplyPlainPermanent("Check your DMs")
+	ctx.ReplyWith(command.NewMessageResponseWithComponents(utils.Slice(
+		utils.BuildContainerRaw(
+			ctx,
+			customisation.Orange,
+			"Admin - Premium Key Generation",
+			fmt.Sprintf("Keys have been generated successfully and sent to your DMs.\n\n**SKU:** `%s`\n**Length:** `%d` days\n**Amount:** `%d`", sku.Label, length, amount),
+		),
+	)))
 }
 
 func (AdminGenPremiumCommand) AutoCompleteHandler(data interaction.ApplicationCommandAutoCompleteInteraction, value string) []interaction.ApplicationCommandOptionChoice {

@@ -4,69 +4,69 @@
 package listeners
 
 import (
-    "encoding/json"
-    "fmt"
-    "github.com/Miniplays-Tickets/worker"
-    "github.com/getsentry/sentry-go"
-    "github.com/rxdn/gdl/gateway/payloads"
-    "github.com/rxdn/gdl/gateway/payloads/events"
+	"encoding/json"
+	"fmt"
+
+	"github.com/Miniplays-Tickets/worker"
+	"github.com/TicketsBot-cloud/gdl/gateway/payloads"
+	"github.com/TicketsBot-cloud/gdl/gateway/payloads/events"
+	"github.com/getsentry/sentry-go"
 )
 
 var (
-    
-    ChannelCreateListeners = []func(*worker.Context, events.ChannelCreate){}
-    ChannelDeleteListeners = []func(*worker.Context, events.ChannelDelete){}
-    ChannelPinsUpdateListeners = []func(*worker.Context, events.ChannelPinsUpdate){}
-    ChannelUpdateListeners = []func(*worker.Context, events.ChannelUpdate){}
-    EntitlementCreateListeners = []func(*worker.Context, events.EntitlementCreate){}
-    EntitlementDeleteListeners = []func(*worker.Context, events.EntitlementDelete){}
-    EntitlementUpdateListeners = []func(*worker.Context, events.EntitlementUpdate){}
-    GuildBanAddListeners = []func(*worker.Context, events.GuildBanAdd){}
-    GuildBanRemoveListeners = []func(*worker.Context, events.GuildBanRemove){}
-    GuildCreateListeners = []func(*worker.Context, events.GuildCreate){}
-    GuildDeleteListeners = []func(*worker.Context, events.GuildDelete){}
-    GuildEmojisUpdateListeners = []func(*worker.Context, events.GuildEmojisUpdate){}
-    GuildIntegrationsUpdateListeners = []func(*worker.Context, events.GuildIntegrationsUpdate){}
-    GuildMemberAddListeners = []func(*worker.Context, events.GuildMemberAdd){}
-    GuildMemberRemoveListeners = []func(*worker.Context, events.GuildMemberRemove){}
-    GuildMemberUpdateListeners = []func(*worker.Context, events.GuildMemberUpdate){}
-    GuildMembersChunkListeners = []func(*worker.Context, events.GuildMembersChunk){}
-    GuildRoleCreateListeners = []func(*worker.Context, events.GuildRoleCreate){}
-    GuildRoleDeleteListeners = []func(*worker.Context, events.GuildRoleDelete){}
-    GuildRoleUpdateListeners = []func(*worker.Context, events.GuildRoleUpdate){}
-    GuildUpdateListeners = []func(*worker.Context, events.GuildUpdate){}
-    InvalidSessionListeners = []func(*worker.Context, events.InvalidSession){}
-    InviteCreateListeners = []func(*worker.Context, events.InviteCreate){}
-    InviteDeleteListeners = []func(*worker.Context, events.InviteDelete){}
-    MessageCreateListeners = []func(*worker.Context, events.MessageCreate){}
-    MessageDeleteListeners = []func(*worker.Context, events.MessageDelete){}
-    MessageDeleteBulkListeners = []func(*worker.Context, events.MessageDeleteBulk){}
-    MessageReactionAddListeners = []func(*worker.Context, events.MessageReactionAdd){}
-    MessageReactionRemoveListeners = []func(*worker.Context, events.MessageReactionRemove){}
-    MessageReactionRemoveAllListeners = []func(*worker.Context, events.MessageReactionRemoveAll){}
-    MessageReactionRemoveEmojiListeners = []func(*worker.Context, events.MessageReactionRemoveEmoji){}
-    MessageUpdateListeners = []func(*worker.Context, events.MessageUpdate){}
-    PresenceUpdateListeners = []func(*worker.Context, events.PresenceUpdate){}
-    ReadyListeners = []func(*worker.Context, events.Ready){}
-    ReconnectListeners = []func(*worker.Context, events.Reconnect){}
-    ResumedListeners = []func(*worker.Context, events.Resumed){}
-    ThreadCreateListeners = []func(*worker.Context, events.ThreadCreate){}
-    ThreadDeleteListeners = []func(*worker.Context, events.ThreadDelete){}
-    ThreadListSyncListeners = []func(*worker.Context, events.ThreadListSync){}
-    ThreadMemberUpdateListeners = []func(*worker.Context, events.ThreadMemberUpdate){}
-    ThreadMembersUpdateListeners = []func(*worker.Context, events.ThreadMembersUpdate){}
-    ThreadUpdateListeners = []func(*worker.Context, events.ThreadUpdate){}
-    TypingStartListeners = []func(*worker.Context, events.TypingStart){}
-    UserUpdateListeners = []func(*worker.Context, events.UserUpdate){}
-    VoiceServerUpdateListeners = []func(*worker.Context, events.VoiceServerUpdate){}
-    VoiceStateUpdateListeners = []func(*worker.Context, events.VoiceStateUpdate){}
-    WebhooksUpdateListeners = []func(*worker.Context, events.WebhooksUpdate){}
+	ChannelCreateListeners              = []func(*worker.Context, events.ChannelCreate){}
+	ChannelDeleteListeners              = []func(*worker.Context, events.ChannelDelete){}
+	ChannelPinsUpdateListeners          = []func(*worker.Context, events.ChannelPinsUpdate){}
+	ChannelUpdateListeners              = []func(*worker.Context, events.ChannelUpdate){}
+	EntitlementCreateListeners          = []func(*worker.Context, events.EntitlementCreate){}
+	EntitlementDeleteListeners          = []func(*worker.Context, events.EntitlementDelete){}
+	EntitlementUpdateListeners          = []func(*worker.Context, events.EntitlementUpdate){}
+	GuildBanAddListeners                = []func(*worker.Context, events.GuildBanAdd){}
+	GuildBanRemoveListeners             = []func(*worker.Context, events.GuildBanRemove){}
+	GuildCreateListeners                = []func(*worker.Context, events.GuildCreate){}
+	GuildDeleteListeners                = []func(*worker.Context, events.GuildDelete){}
+	GuildEmojisUpdateListeners          = []func(*worker.Context, events.GuildEmojisUpdate){}
+	GuildIntegrationsUpdateListeners    = []func(*worker.Context, events.GuildIntegrationsUpdate){}
+	GuildMemberAddListeners             = []func(*worker.Context, events.GuildMemberAdd){}
+	GuildMemberRemoveListeners          = []func(*worker.Context, events.GuildMemberRemove){}
+	GuildMemberUpdateListeners          = []func(*worker.Context, events.GuildMemberUpdate){}
+	GuildMembersChunkListeners          = []func(*worker.Context, events.GuildMembersChunk){}
+	GuildRoleCreateListeners            = []func(*worker.Context, events.GuildRoleCreate){}
+	GuildRoleDeleteListeners            = []func(*worker.Context, events.GuildRoleDelete){}
+	GuildRoleUpdateListeners            = []func(*worker.Context, events.GuildRoleUpdate){}
+	GuildUpdateListeners                = []func(*worker.Context, events.GuildUpdate){}
+	InvalidSessionListeners             = []func(*worker.Context, events.InvalidSession){}
+	InviteCreateListeners               = []func(*worker.Context, events.InviteCreate){}
+	InviteDeleteListeners               = []func(*worker.Context, events.InviteDelete){}
+	MessageCreateListeners              = []func(*worker.Context, events.MessageCreate){}
+	MessageDeleteListeners              = []func(*worker.Context, events.MessageDelete){}
+	MessageDeleteBulkListeners          = []func(*worker.Context, events.MessageDeleteBulk){}
+	MessageReactionAddListeners         = []func(*worker.Context, events.MessageReactionAdd){}
+	MessageReactionRemoveListeners      = []func(*worker.Context, events.MessageReactionRemove){}
+	MessageReactionRemoveAllListeners   = []func(*worker.Context, events.MessageReactionRemoveAll){}
+	MessageReactionRemoveEmojiListeners = []func(*worker.Context, events.MessageReactionRemoveEmoji){}
+	MessageUpdateListeners              = []func(*worker.Context, events.MessageUpdate){}
+	PresenceUpdateListeners             = []func(*worker.Context, events.PresenceUpdate){}
+	ReadyListeners                      = []func(*worker.Context, events.Ready){}
+	ReconnectListeners                  = []func(*worker.Context, events.Reconnect){}
+	ResumedListeners                    = []func(*worker.Context, events.Resumed){}
+	ThreadCreateListeners               = []func(*worker.Context, events.ThreadCreate){}
+	ThreadDeleteListeners               = []func(*worker.Context, events.ThreadDelete){}
+	ThreadListSyncListeners             = []func(*worker.Context, events.ThreadListSync){}
+	ThreadMemberUpdateListeners         = []func(*worker.Context, events.ThreadMemberUpdate){}
+	ThreadMembersUpdateListeners        = []func(*worker.Context, events.ThreadMembersUpdate){}
+	ThreadUpdateListeners               = []func(*worker.Context, events.ThreadUpdate){}
+	TypingStartListeners                = []func(*worker.Context, events.TypingStart){}
+	UserUpdateListeners                 = []func(*worker.Context, events.UserUpdate){}
+	VoiceServerUpdateListeners          = []func(*worker.Context, events.VoiceServerUpdate){}
+	VoiceStateUpdateListeners           = []func(*worker.Context, events.VoiceStateUpdate){}
+	WebhooksUpdateListeners             = []func(*worker.Context, events.WebhooksUpdate){}
 )
 
 func HandleEvent(c *worker.Context, span *sentry.Span, payload payloads.Payload) error {
-    if payload.Opcode != 0 { // Dispatch
-        return fmt.Errorf("HandleEvent called with non-dispatch op-code: %d", payload.Opcode)
-    }
+	if payload.Opcode != 0 { // Dispatch
+		return fmt.Errorf("HandleEvent called with non-dispatch op-code: %d", payload.Opcode)
+	}
 
 	switch events.EventType(payload.EventName) {
 

@@ -2,16 +2,21 @@ package admin
 
 import (
 	"errors"
+	"fmt"
 	"strconv"
 	"time"
 
 	w "github.com/Miniplays-Tickets/worker"
 	"github.com/Miniplays-Tickets/worker/bot/command"
 	"github.com/Miniplays-Tickets/worker/bot/command/registry"
+	"github.com/Miniplays-Tickets/worker/bot/customisation"
 	"github.com/Miniplays-Tickets/worker/bot/dbclient"
+	"github.com/Miniplays-Tickets/worker/bot/redis"
+	"github.com/Miniplays-Tickets/worker/bot/utils"
 	"github.com/Miniplays-Tickets/worker/i18n"
 	"github.com/TicketsBot-cloud/common/permission"
-	"github.com/rxdn/gdl/objects/interaction"
+	"github.com/TicketsBot-cloud/gdl/objects/interaction"
+	"github.com/TicketsBot-cloud/gdl/objects/interaction/component"
 )
 
 type AdminRecacheCommand struct {
@@ -48,6 +53,23 @@ func (AdminRecacheCommand) Execute(ctx registry.CommandContext, providedGuildId 
 	} else {
 		guildId = ctx.GuildId()
 	}
+
+	if onCooldown, cooldownTime := redis.GetRecacheCooldown(guildId); onCooldown {
+		ctx.ReplyWith(command.NewMessageResponseWithComponents([]component.Component{
+			utils.BuildContainerWithComponents(
+				ctx,
+				customisation.Red,
+				"Admin - Recache",
+				[]component.Component{
+					component.BuildTextDisplay(component.TextDisplay{
+						Content: fmt.Sprintf("Recache for this guild is on cooldown. Please wait until it is available again.\n\n**Cooldown ends** <t:%d:R>", cooldownTime.Unix()),
+					}),
+				},
+			)}))
+		return
+	}
+
+	currentTime := time.Now()
 
 	// purge cache
 	ctx.Worker().Cache.DeleteGuild(ctx, guildId)
@@ -86,15 +108,37 @@ func (AdminRecacheCommand) Execute(ctx registry.CommandContext, providedGuildId 
 		worker = ctx.Worker()
 	}
 
-	if _, err := worker.GetGuild(guildId); err != nil {
+	guild, err := worker.GetGuild(guildId)
+	if err != nil {
 		ctx.HandleError(err)
 		return
 	}
 
-	if _, err := worker.GetGuildChannels(guildId); err != nil {
+	guildChannels, err := worker.GetGuildChannels(guildId)
+	if err != nil {
 		ctx.HandleError(err)
 		return
 	}
 
-	ctx.ReplyPlainPermanent("done")
+	if err := redis.SetRecacheCooldown(guildId, time.Second*30); err != nil {
+		ctx.HandleError(err)
+		return
+	}
+
+	ctx.ReplyWith(command.NewMessageResponseWithComponents([]component.Component{
+		utils.BuildContainerWithComponents(
+			ctx,
+			customisation.Orange,
+			"Admin - Recache",
+			[]component.Component{
+				component.BuildTextDisplay(component.TextDisplay{
+					Content: fmt.Sprintf("**%s** has been recached successfully.\n\n**Guild ID:** %d\n**Time Taken:** %s", guild.Name, guildId, time.Since(currentTime).Round(time.Millisecond)),
+				}),
+				component.BuildSeparator(component.Separator{}),
+				component.BuildTextDisplay(component.TextDisplay{
+					Content: fmt.Sprintf("### Cache Stats\n**Channels:** `%d`\n**Roles:** `%d`", len(guildChannels), len(guild.Roles)),
+				}),
+			},
+		),
+	}))
 }

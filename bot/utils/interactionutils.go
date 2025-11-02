@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"strconv"
 
-	"github.com/rxdn/gdl/objects/interaction"
+	"github.com/TicketsBot-cloud/gdl/objects/interaction"
 )
 
 func ButtonInteractionUser(data interaction.MessageComponentInteraction) uint64 {

@@ -20,10 +20,10 @@ import (
 	"github.com/Miniplays-Tickets/worker/i18n"
 	permcache "github.com/TicketsBot-cloud/common/permission"
 	"github.com/TicketsBot-cloud/database"
-	"github.com/rxdn/gdl/objects/channel"
-	"github.com/rxdn/gdl/permission"
-	"github.com/rxdn/gdl/rest"
-	"github.com/rxdn/gdl/rest/request"
+	"github.com/TicketsBot-cloud/gdl/objects/channel"
+	"github.com/TicketsBot-cloud/gdl/permission"
+	"github.com/TicketsBot-cloud/gdl/rest"
+	"github.com/TicketsBot-cloud/gdl/rest/request"
 )
 
 type AddSupportHandler struct{}
@@ -121,7 +121,9 @@ func (h *AddSupportHandler) Execute(ctx *context.ButtonContext) {
 		return
 	}
 
-	e := utils.BuildEmbed(ctx, customisation.Green, i18n.TitleAddSupport, i18n.MessageAddSupportSuccess, nil)
+	mention := fmt.Sprintf("<@&%d>", id)
+
+	e := utils.BuildEmbed(ctx, customisation.Green, i18n.TitleAddSupport, i18n.MessageAddSupportSuccess, nil, mention)
 	ctx.Edit(command.NewEphemeralEmbedMessageResponse(e))
 
 	updateChannelPermissions(ctx, id, mentionableType)

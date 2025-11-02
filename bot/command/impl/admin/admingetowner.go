@@ -8,9 +8,10 @@ import (
 	"github.com/Miniplays-Tickets/worker/bot/command"
 	"github.com/Miniplays-Tickets/worker/bot/command/registry"
 	"github.com/Miniplays-Tickets/worker/bot/customisation"
+	"github.com/Miniplays-Tickets/worker/bot/utils"
 	"github.com/Miniplays-Tickets/worker/i18n"
 	"github.com/TicketsBot-cloud/common/permission"
-	"github.com/rxdn/gdl/objects/interaction"
+	"github.com/TicketsBot-cloud/gdl/objects/interaction"
 )
 
 type AdminGetOwnerCommand struct {
@@ -31,7 +32,7 @@ func (AdminGetOwnerCommand) Properties() registry.Properties {
 	}
 }
 
-func (c AdminGetOwnerCommand) GetExecutor() interface{} {
+func (c AdminGetOwnerCommand) GetExecutor() any {
 	return c.Execute
 }
 
@@ -48,5 +49,9 @@ func (AdminGetOwnerCommand) Execute(ctx registry.CommandContext, raw string) {
 		return
 	}
 
-	ctx.ReplyRaw(customisation.Green, ctx.GetMessage(i18n.Admin), fmt.Sprintf("`%s` is owned by <@%d> (%d)", guild.Name, guild.OwnerId, guild.OwnerId))
+	ctx.ReplyWith(command.NewMessageResponseWithComponents(utils.Slice(utils.BuildContainerRaw(
+		ctx,
+		customisation.Orange,
+		"Admin - Get Owner",
+		fmt.Sprintf("**Guild ID:** `%d`\n**Guild Name:** `%s`\n\n**Owner:** <@%[3]d>\n**Owner ID:** `%[3]d`", guild.Id, guild.Name, guild.OwnerId)))))
 }

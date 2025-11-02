@@ -15,10 +15,11 @@ import (
 	"github.com/TicketsBot-cloud/common/permission"
 	"github.com/TicketsBot-cloud/common/premium"
 	"github.com/TicketsBot-cloud/database"
-	"github.com/rxdn/gdl/objects/channel/embed"
-	"github.com/rxdn/gdl/objects/channel/message"
-	"github.com/rxdn/gdl/objects/interaction"
-	"github.com/rxdn/gdl/objects/interaction/component"
+	"github.com/TicketsBot-cloud/gdl/objects/channel/embed"
+	"github.com/TicketsBot-cloud/gdl/objects/channel/message"
+	"github.com/TicketsBot-cloud/gdl/objects/interaction"
+	"github.com/TicketsBot-cloud/gdl/objects/interaction/component"
+	"github.com/TicketsBot-cloud/gdl/rest"
 )
 
 type CloseRequestCommand struct {
@@ -26,12 +27,13 @@ type CloseRequestCommand struct {
 
 func (c CloseRequestCommand) Properties() registry.Properties {
 	return registry.Properties{
-		Name:            "closerequest",
-		Description:     i18n.HelpCloseRequest,
-		Type:            interaction.ApplicationCommandTypeChatInput,
-		PermissionLevel: permission.Support,
-		Category:        command.Tickets,
-		InteractionOnly: true,
+		Name:             "closerequest",
+		Description:      i18n.HelpCloseRequest,
+		Type:             interaction.ApplicationCommandTypeChatInput,
+		PermissionLevel:  permission.Support,
+		Category:         command.Tickets,
+		InteractionOnly:  true,
+		DefaultEphemeral: true,
 		Arguments: command.Arguments(
 			command.NewOptionalArgument("close_delay", "Stunden in denen das Ticket geschlossen wird wenn der User nicht reagiert", interaction.OptionTypeInteger, "infallible"),
 			command.NewOptionalAutocompleteableArgument("reason", "Der Grund weshalb das Ticket geschlossen wurde", interaction.OptionTypeString, "infallible", c.ReasonAutoCompleteHandler),
@@ -107,19 +109,20 @@ func (CloseRequestCommand) Execute(ctx registry.CommandContext, closeDelay *int,
 		}),
 	)
 
-	data := command.MessageResponse{
+	_, err = ctx.Worker().CreateMessageComplex(ctx.ChannelId(), rest.CreateMessageData{
 		Content: fmt.Sprintf("<@%d>", ticket.UserId),
 		Embeds:  []*embed.Embed{msgEmbed},
 		AllowedMentions: message.AllowedMention{
 			Users: []uint64{ticket.UserId},
 		},
 		Components: []component.Component{components},
-	}
-
-	if _, err := ctx.ReplyWith(data); err != nil {
+	})
+	if err != nil {
 		ctx.HandleError(err)
 		return
 	}
+
+	ctx.ReplyPlain(ctx.GetMessage(i18n.MessageCloseRequested))
 
 	if err := dbclient.Client.Tickets.SetStatus(ctx, ctx.GuildId(), ticket.Id, model.TicketStatusPending); err != nil {
 		ctx.HandleError(err)

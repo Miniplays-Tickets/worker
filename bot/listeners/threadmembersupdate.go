@@ -11,11 +11,11 @@ import (
 	"github.com/Miniplays-Tickets/worker/bot/utils"
 	"github.com/TicketsBot-cloud/common/sentry"
 	"github.com/TicketsBot-cloud/database"
-	"github.com/rxdn/gdl/gateway/payloads/events"
+	"github.com/TicketsBot-cloud/gdl/gateway/payloads/events"
 )
 
 func OnThreadMembersUpdate(worker *worker.Context, e events.ThreadMembersUpdate) {
-	ctx, cancel := context.WithTimeout(context.Background(), time.Second*6) // TODO: Propagate context
+	ctx, cancel := context.WithTimeout(context.Background(), time.Second*15) // TODO: Propagate context
 	defer cancel()
 
 	settings, err := dbclient.Client.Settings.Get(ctx, e.GuildId)

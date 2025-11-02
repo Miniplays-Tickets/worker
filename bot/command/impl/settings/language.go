@@ -14,8 +14,8 @@ import (
 	"github.com/Miniplays-Tickets/worker/bot/utils"
 	"github.com/Miniplays-Tickets/worker/i18n"
 	"github.com/TicketsBot-cloud/common/permission"
-	"github.com/rxdn/gdl/objects/interaction"
-	"github.com/rxdn/gdl/objects/interaction/component"
+	"github.com/TicketsBot-cloud/gdl/objects/interaction"
+	"github.com/TicketsBot-cloud/gdl/objects/interaction/component"
 	"github.com/schollz/progressbar/v3"
 )
 
@@ -109,7 +109,7 @@ func buildComponents(ctx registry.CommandContext) []component.Component {
 
 		menu.Options = append(menu.Options, component.SelectOption{
 			Label:       locale.EnglishName,
-			Description: locale.LocalName,
+			Description: utils.Ptr(locale.LocalName),
 			Value:       locale.IsoShortCode,
 			Emoji:       utils.BuildEmoji(locale.FlagEmoji),
 			Default:     false,

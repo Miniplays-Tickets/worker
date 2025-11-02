@@ -6,7 +6,7 @@ import (
 	"github.com/Miniplays-Tickets/worker"
 	"github.com/TicketsBot-cloud/common/eventforwarding"
 	"github.com/TicketsBot-cloud/common/rpc"
-	"github.com/rxdn/gdl/cache"
+	"github.com/TicketsBot-cloud/gdl/cache"
 	"go.uber.org/zap"
 )
 

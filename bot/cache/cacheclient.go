@@ -6,10 +6,10 @@ import (
 	"time"
 
 	"github.com/Miniplays-Tickets/worker/config"
+	"github.com/TicketsBot-cloud/gdl/cache"
 	"github.com/jackc/pgx/v4"
 	"github.com/jackc/pgx/v4/log/logrusadapter"
 	"github.com/jackc/pgx/v4/pgxpool"
-	"github.com/rxdn/gdl/cache"
 	"github.com/sirupsen/logrus"
 	"go.uber.org/zap"
 )

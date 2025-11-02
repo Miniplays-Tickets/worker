@@ -15,6 +15,7 @@ import (
 	"github.com/Miniplays-Tickets/worker/bot/dbclient"
 	"github.com/Miniplays-Tickets/worker/bot/metrics/prometheus"
 	"github.com/Miniplays-Tickets/worker/bot/metrics/statsd"
+	"github.com/Miniplays-Tickets/worker/bot/permissionwrapper"
 	"github.com/Miniplays-Tickets/worker/bot/redis"
 	"github.com/Miniplays-Tickets/worker/bot/utils"
 	"github.com/Miniplays-Tickets/worker/i18n"
@@ -22,14 +23,15 @@ import (
 	"github.com/TicketsBot-cloud/common/premium"
 	"github.com/TicketsBot-cloud/common/sentry"
 	"github.com/TicketsBot-cloud/database"
-	"github.com/rxdn/gdl/objects/channel"
-	"github.com/rxdn/gdl/objects/channel/message"
-	"github.com/rxdn/gdl/objects/interaction/component"
-	"github.com/rxdn/gdl/objects/member"
-	"github.com/rxdn/gdl/objects/user"
-	"github.com/rxdn/gdl/permission"
-	"github.com/rxdn/gdl/rest"
-	"github.com/rxdn/gdl/rest/request"
+	"github.com/TicketsBot-cloud/gdl/objects/channel"
+	"github.com/TicketsBot-cloud/gdl/objects/channel/message"
+	"github.com/TicketsBot-cloud/gdl/objects/guild"
+	"github.com/TicketsBot-cloud/gdl/objects/interaction/component"
+	"github.com/TicketsBot-cloud/gdl/objects/member"
+	"github.com/TicketsBot-cloud/gdl/objects/user"
+	"github.com/TicketsBot-cloud/gdl/permission"
+	"github.com/TicketsBot-cloud/gdl/rest"
+	"github.com/TicketsBot-cloud/gdl/rest/request"
 	"golang.org/x/sync/errgroup"
 )
 
@@ -321,7 +323,7 @@ func OpenTicket(ctx context.Context, cmd registry.InteractionContext, panel *dat
 		}
 	} else {
 		span = sentry.StartSpan(rootSpan.Context(), "Build permission overwrites")
-		overwrites, err := CreateOverwrites(ctx, cmd, cmd.UserId(), panel)
+		overwrites, err := CreateOverwrites(ctx, cmd, cmd.UserId(), panel, category)
 		if err != nil {
 			cmd.HandleError(err)
 			return database.Ticket{}, err
@@ -529,7 +531,7 @@ func OpenTicket(ctx context.Context, cmd registry.InteractionContext, panel *dat
 			}
 
 			span := sentry.StartSpan(rootSpan.Context(), "Send ping message")
-			_, err := cmd.Worker().CreateMessageComplex(ch.Id, rest.CreateMessageData{
+			msg, err := cmd.Worker().CreateMessageComplex(ch.Id, rest.CreateMessageData{
 				Content: content,
 				AllowedMentions: message.AllowedMention{
 					Parse: []message.AllowedMentionType{
@@ -545,11 +547,11 @@ func OpenTicket(ctx context.Context, cmd registry.InteractionContext, panel *dat
 				return err
 			}
 
-			// Disable delete message
-			// error is likely to be a permission error
-			// span = sentry.StartSpan(span.Context(), "Delete ping message")
-			// _ = cmd.Worker().DeleteMessage(ch.Id, pingMessage.Id)
-			// span.Finish()
+			if panel != nil && panel.DeleteMentions {
+				span = sentry.StartSpan(rootSpan.Context(), "Delete ping message")
+				_ = cmd.Worker().DeleteMessage(ch.Id, msg.Id)
+				span.Finish()
+			}
 		}
 
 		return nil
@@ -557,10 +559,14 @@ func OpenTicket(ctx context.Context, cmd registry.InteractionContext, panel *dat
 
 	// Create webhook
 	// TODO: Create webhook on use, rather than on ticket creation.
-	// TODO: Webhooks for threads should be created on the parent channel.
-	if cmd.PremiumTier() > premium.None && !ticket.IsThread {
+	if cmd.PremiumTier() > premium.None {
 		group.Go(func() error {
-			return createWebhook(rootSpan.Context(), cmd, ticketId, cmd.GuildId(), ch.Id)
+			// For threads, create webhook on the parent channel since threads can't have their own webhooks
+			webhookChannelId := ch.Id
+			if ticket.IsThread {
+				webhookChannelId = cmd.ChannelId() // Parent channel
+			}
+			return createWebhook(rootSpan.Context(), cmd, ticketId, cmd.GuildId(), webhookChannelId)
 		})
 	}
 
@@ -625,6 +631,17 @@ func checkChannelLimitAndDetermineParentId(
 		categoryChildrenCount := countRealChannels(channels, categoryId)
 
 		if categoryChildrenCount >= 50 {
+			// Check if we're already in the overflow category
+			isOverflowCategory := settings.OverflowEnabled &&
+				settings.OverflowCategoryId != nil &&
+				*settings.OverflowCategoryId == categoryId
+
+			// If this is the overflow category and it's full, we can't retry or use another overflow
+			if isOverflowCategory {
+				span.Finish()
+				return 0, errCategoryChannelLimitReached
+			}
+
 			if canRetry {
 				canRefresh, err := redis.TakeChannelRefetchToken(ctx, guildId)
 				if err != nil {
@@ -638,7 +655,11 @@ func checkChannelLimitAndDetermineParentId(
 
 					return checkChannelLimitAndDetermineParentId(ctx, worker, guildId, categoryId, settings, false)
 				} else {
-					return 0, errCategoryChannelLimitReached
+					// If we can't refresh but overflow is available, try overflow
+					// instead of immediately returning an error
+					if !settings.OverflowEnabled {
+						return 0, errCategoryChannelLimitReached
+					}
 				}
 			}
 
@@ -674,6 +695,7 @@ func checkChannelLimitAndDetermineParentId(
 				return 0, errCategoryChannelLimitReached
 			}
 		}
+		span.Finish()
 	}
 
 	return categoryId, nil
@@ -725,9 +747,12 @@ func getTicketLimit(ctx context.Context, cmd registry.CommandContext) (bool, int
 }
 
 func createWebhook(ctx context.Context, c registry.CommandContext, ticketId int, guildId, channelId uint64) error {
-	// TODO: Re-add permission check
-	//if permission.HasPermissionsChannel(ctx.Shard, ctx.GuildId, ctx.Shard.SelfId(), channelId, permission.ManageWebhooks) { // Do we actually need this?
-	root := sentry.StartSpan(ctx, "Create webhook")
+	// Check if bot has ManageWebhooks permission in the channel before attempting to create
+	if !permissionwrapper.HasPermissionsChannel(c.Worker(), guildId, c.Worker().BotId, channelId, permission.ManageWebhooks) {
+		return nil // Silently skip webhook creation if no permission
+	}
+
+	root := sentry.StartSpan(ctx, "Create or reuse webhook")
 	defer root.Finish()
 
 	span := sentry.StartSpan(root.Context(), "Get bot user")
@@ -737,34 +762,65 @@ func createWebhook(ctx context.Context, c registry.CommandContext, ticketId int,
 		return err
 	}
 
-	data := rest.WebhookData{
-		Username: self.Username,
-		Avatar:   self.AvatarUrl(256),
-	}
-
-	span = sentry.StartSpan(root.Context(), "Get bot user")
-	webhook, err := c.Worker().CreateWebhook(channelId, data)
+	// Check if a webhook already exists for this channel (to reuse for thread tickets)
+	span = sentry.StartSpan(root.Context(), "Get existing channel webhooks")
+	existingWebhooks, err := c.Worker().GetChannelWebhooks(channelId)
 	span.Finish()
-	if err != nil {
-		sentry.ErrorWithContext(err, c.ToErrorContext())
-		return nil // Silently fail
+
+	var webhook guild.Webhook
+	foundExisting := false
+
+	if err == nil {
+		// Look for an existing webhook owned by the bot
+		for _, wh := range existingWebhooks {
+			if wh.User.Id == c.Worker().BotId {
+				// Verify the webhook still exists and is valid by fetching it
+				span = sentry.StartSpan(root.Context(), "Verify webhook exists")
+				verifiedWebhook, verifyErr := c.Worker().GetWebhook(wh.Id)
+				span.Finish()
+
+				if verifyErr == nil && verifiedWebhook.Id != 0 {
+					webhook = verifiedWebhook
+					foundExisting = true
+					break
+				}
+				// If verification failed, the webhook was deleted, so we'll create a new one
+			}
+		}
 	}
 
-	dbWebhook := database.Webhook{
-		Id:    webhook.Id,
-		Token: webhook.Token,
-	}
+	// If no existing webhook found, create a new one
+	if !foundExisting {
+		data := rest.WebhookData{
+			Username: self.Username,
+			Avatar:   self.AvatarUrl(256),
+		}
 
-	span = sentry.StartSpan(root.Context(), "Store webhook in database")
-	defer span.Finish()
-	if err := dbclient.Client.Webhooks.Create(ctx, guildId, ticketId, dbWebhook); err != nil {
-		return err
+		span = sentry.StartSpan(root.Context(), "Create new webhook")
+		webhook, err = c.Worker().CreateWebhook(channelId, data)
+		span.Finish()
+		if err != nil {
+			sentry.ErrorWithContext(err, c.ToErrorContext())
+			return nil // Silently fail
+		}
+
+		dbWebhook := database.Webhook{
+			Id:    webhook.Id,
+			Token: webhook.Token,
+		}
+
+		span = sentry.StartSpan(root.Context(), "Store webhook in database")
+		defer span.Finish()
+		if err := dbclient.Client.Webhooks.Create(ctx, guildId, ticketId, dbWebhook); err != nil {
+			sentry.ErrorWithContext(err, c.ToErrorContext())
+			return nil // Silently fail
+		}
 	}
 
 	return nil
 }
 
-func CreateOverwrites(ctx context.Context, cmd registry.InteractionContext, userId uint64, panel *database.Panel, otherUsers ...uint64) ([]channel.PermissionOverwrite, error) {
+func CreateOverwrites(ctx context.Context, cmd registry.InteractionContext, userId uint64, panel *database.Panel, categoryId uint64, otherUsers ...uint64) ([]channel.PermissionOverwrite, error) {
 	overwrites := []channel.PermissionOverwrite{ // @everyone
 		{
 			Id:    cmd.GuildId(),
@@ -786,11 +842,31 @@ func CreateOverwrites(ctx context.Context, cmd registry.InteractionContext, user
 	}
 
 	// Add the bot to the overwrites
-	selfAllow := make([]permission.Permission, len(StandardPermissions), len(StandardPermissions)+1)
+	selfAllow := make([]permission.Permission, len(StandardPermissions), len(StandardPermissions)+2)
 	copy(selfAllow, StandardPermissions[:]) // Do not append to StandardPermissions
 
-	if permission.HasPermissionRaw(cmd.InteractionMetadata().AppPermissions, permission.ManageWebhooks) {
-		selfAllow = append(selfAllow, permission.ManageWebhooks)
+	// Check bot's permissions in the target category (or guild if no category)
+	var checkChannelId uint64
+	if categoryId != 0 {
+		checkChannelId = categoryId
+	}
+
+	if checkChannelId != 0 {
+		// Check permissions in the category
+		if permissionwrapper.HasPermissionsChannel(cmd.Worker(), cmd.GuildId(), cmd.Worker().BotId, checkChannelId, permission.ManageChannels) {
+			selfAllow = append(selfAllow, permission.ManageChannels)
+		}
+		if permissionwrapper.HasPermissionsChannel(cmd.Worker(), cmd.GuildId(), cmd.Worker().BotId, checkChannelId, permission.ManageWebhooks) {
+			selfAllow = append(selfAllow, permission.ManageWebhooks)
+		}
+	} else {
+		// Check guild-wide permissions
+		if permissionwrapper.HasPermissions(cmd.Worker(), cmd.GuildId(), cmd.Worker().BotId, permission.ManageChannels) {
+			selfAllow = append(selfAllow, permission.ManageChannels)
+		}
+		if permissionwrapper.HasPermissions(cmd.Worker(), cmd.GuildId(), cmd.Worker().BotId, permission.ManageWebhooks) {
+			selfAllow = append(selfAllow, permission.ManageWebhooks)
+		}
 	}
 
 	integrationRoleId, err := GetIntegrationRoleId(ctx, cmd.Worker(), cmd.GuildId())

@@ -8,10 +8,10 @@ import (
 	"github.com/Miniplays-Tickets/worker/bot/dbclient"
 	"github.com/Miniplays-Tickets/worker/bot/utils"
 	"github.com/TicketsBot-cloud/database"
-	"github.com/rxdn/gdl/objects/channel"
-	"github.com/rxdn/gdl/permission"
-	"github.com/rxdn/gdl/rest"
-	"github.com/rxdn/gdl/rest/request"
+	"github.com/TicketsBot-cloud/gdl/objects/channel"
+	"github.com/TicketsBot-cloud/gdl/permission"
+	"github.com/TicketsBot-cloud/gdl/rest"
+	"github.com/TicketsBot-cloud/gdl/rest/request"
 )
 
 // StandardPermissions Returns the standard permissions that users are given in a ticket

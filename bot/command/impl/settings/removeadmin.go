@@ -12,10 +12,10 @@ import (
 	"github.com/Miniplays-Tickets/worker/bot/utils"
 	"github.com/Miniplays-Tickets/worker/i18n"
 	permcache "github.com/TicketsBot-cloud/common/permission"
-	"github.com/rxdn/gdl/objects/channel"
-	"github.com/rxdn/gdl/objects/channel/embed"
-	"github.com/rxdn/gdl/objects/interaction"
-	"github.com/rxdn/gdl/permission"
+	"github.com/TicketsBot-cloud/gdl/objects/channel"
+	"github.com/TicketsBot-cloud/gdl/objects/channel/embed"
+	"github.com/TicketsBot-cloud/gdl/objects/interaction"
+	"github.com/TicketsBot-cloud/gdl/permission"
 )
 
 type RemoveAdminCommand struct{}
@@ -101,7 +101,16 @@ func (c RemoveAdminCommand) Execute(ctx registry.CommandContext, id uint64) {
 		return
 	}
 
-	ctx.Reply(customisation.Green, i18n.TitleRemoveAdmin, i18n.MessageRemoveAdminSuccess)
+	var mention string
+	if mentionableType == context.MentionableTypeUser {
+		mention = fmt.Sprintf("<@%d>", id)
+	} else {
+		mention = fmt.Sprintf("<@&%d>", id)
+	}
+
+	ctx.ReplyWith(command.NewEphemeralEmbedMessageResponse(
+		utils.BuildEmbed(ctx, customisation.Green, i18n.TitleRemoveAdmin, i18n.MessageRemoveAdminSuccess, nil, mention),
+	))
 
 	// Remove user / role from thread notification channel
 	if settings.TicketNotificationChannel != nil {

@@ -5,8 +5,8 @@ import (
 
 	"github.com/Miniplays-Tickets/worker"
 	"github.com/Miniplays-Tickets/worker/bot/command"
-	"github.com/rxdn/gdl/objects/interaction"
-	"github.com/rxdn/gdl/rest"
+	"github.com/TicketsBot-cloud/gdl/objects/interaction"
+	"github.com/TicketsBot-cloud/gdl/rest"
 )
 
 type ResponseEdit struct {

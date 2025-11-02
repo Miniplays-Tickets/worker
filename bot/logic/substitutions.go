@@ -5,8 +5,8 @@ import (
 	"strings"
 
 	"github.com/Miniplays-Tickets/worker"
-	"github.com/rxdn/gdl/objects/member"
-	"github.com/rxdn/gdl/objects/user"
+	"github.com/TicketsBot-cloud/gdl/objects/member"
+	"github.com/TicketsBot-cloud/gdl/objects/user"
 )
 
 type SubstitutionFunc func(user user.User, member member.Member) string

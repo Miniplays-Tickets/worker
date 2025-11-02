@@ -9,7 +9,7 @@ import (
 	"github.com/Miniplays-Tickets/worker/bot/redis"
 	"github.com/TicketsBot-cloud/common/permission"
 	"github.com/TicketsBot-cloud/database"
-	"github.com/rxdn/gdl/cache"
+	"github.com/TicketsBot-cloud/gdl/cache"
 )
 
 func ToRetriever(worker *worker.Context) permission.Retriever {

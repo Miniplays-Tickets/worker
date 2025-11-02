@@ -30,8 +30,10 @@ import (
 	"github.com/TicketsBot-cloud/common/premium"
 	"github.com/TicketsBot-cloud/common/rpc"
 	"github.com/TicketsBot-cloud/common/sentry"
-	"github.com/rxdn/gdl/rest/request"
+	"github.com/TicketsBot-cloud/gdl/rest/request"
 	"go.uber.org/zap"
+
+	_ "github.com/joho/godotenv/autoload"
 )
 
 func main() {
@@ -152,8 +154,8 @@ func main() {
 	integrations.InitIntegrations()
 
 	go messagequeue.ListenTicketClose()
-	go messagequeue.ListenAutoClose()
-	go messagequeue.ListenCloseRequestTimer()
+	go messagequeue.ListenAutoClose(logger.With(zap.String("service", "autoclose")))
+	go messagequeue.ListenCloseRequestTimer(logger.With(zap.String("service", "close-request-timer")))
 
 	go blacklist.StartCacheRefreshLoop(logger.With(zap.String("service", "blacklist_refresh")))
 

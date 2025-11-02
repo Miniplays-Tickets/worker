@@ -9,9 +9,9 @@ import (
 	"github.com/Miniplays-Tickets/worker/bot/redis"
 	"github.com/TicketsBot-cloud/common/rpc"
 	"github.com/TicketsBot-cloud/common/rpc/model"
-	"github.com/rxdn/gdl/cache"
-	"github.com/rxdn/gdl/objects/channel"
-	"github.com/rxdn/gdl/rest"
+	"github.com/TicketsBot-cloud/gdl/cache"
+	"github.com/TicketsBot-cloud/gdl/objects/channel"
+	"github.com/TicketsBot-cloud/gdl/rest"
 	"go.uber.org/zap"
 )
 

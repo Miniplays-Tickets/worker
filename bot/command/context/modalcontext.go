@@ -15,14 +15,14 @@ import (
 	permcache "github.com/TicketsBot-cloud/common/permission"
 	"github.com/TicketsBot-cloud/common/premium"
 	"github.com/TicketsBot-cloud/common/sentry"
-	"github.com/rxdn/gdl/objects/channel"
-	"github.com/rxdn/gdl/objects/channel/message"
-	"github.com/rxdn/gdl/objects/guild"
-	"github.com/rxdn/gdl/objects/interaction"
-	"github.com/rxdn/gdl/objects/interaction/component"
-	"github.com/rxdn/gdl/objects/member"
-	"github.com/rxdn/gdl/objects/user"
-	"github.com/rxdn/gdl/rest"
+	"github.com/TicketsBot-cloud/gdl/objects/channel"
+	"github.com/TicketsBot-cloud/gdl/objects/channel/message"
+	"github.com/TicketsBot-cloud/gdl/objects/guild"
+	"github.com/TicketsBot-cloud/gdl/objects/interaction"
+	"github.com/TicketsBot-cloud/gdl/objects/interaction/component"
+	"github.com/TicketsBot-cloud/gdl/objects/member"
+	"github.com/TicketsBot-cloud/gdl/objects/user"
+	"github.com/TicketsBot-cloud/gdl/rest"
 	"go.uber.org/atomic"
 )
 
@@ -71,11 +71,16 @@ func (c *ModalContext) Defer() {
 
 func (c *ModalContext) GetInput(customId string) (string, bool) {
 	for _, c := range c.Interaction.Data.Components {
-		if c.Type != component.ComponentActionRow || len(c.Components) != 1 {
+		if (c.Type != component.ComponentActionRow && c.Type != component.ComponentLabel) || (len(c.Components) != 1 && c.Component == nil) {
 			continue
 		}
 
-		input := c.Components[0]
+		input := c.Component
+
+		if input == nil && len(c.Components) > 0 {
+			input = &c.Components[0]
+		}
+
 		if input.Type != component.ComponentInputText {
 			continue
 		}

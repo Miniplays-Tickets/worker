@@ -13,7 +13,7 @@ import (
 	"github.com/Miniplays-Tickets/worker/i18n"
 	"github.com/TicketsBot-cloud/common/permission"
 	"github.com/TicketsBot-cloud/common/sentry"
-	"github.com/rxdn/gdl/objects/interaction"
+	"github.com/TicketsBot-cloud/gdl/objects/interaction"
 )
 
 type CloseCommand struct {
@@ -71,7 +71,7 @@ func (CloseCommand) AutoCompleteHandler(data interaction.ApplicationCommandAutoC
 			panelId = ticket.PanelId
 		}
 
-		reasons, err = dbclient.Analytics.GetTopCloseReasonsWithPrefix(ctx, data.GuildId.Value, panelId, value)
+		reasons, err = dbclient.Analytics.GetTopCloseReasonsContaining(ctx, data.GuildId.Value, panelId, value)
 	}
 
 	if err != nil {

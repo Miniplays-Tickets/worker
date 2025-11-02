@@ -10,12 +10,12 @@ import (
 	"strings"
 	"unicode"
 
-	_ "github.com/rxdn/gdl/gateway/payloads/events"
+	_ "github.com/TicketsBot-cloud/gdl/gateway/payloads/events"
 	"golang.org/x/tools/go/packages"
 )
 
 const (
-	PackageName = "github.com/rxdn/gdl/gateway/payloads/events"
+	PackageName = "github.com/TicketsBot-cloud/gdl/gateway/payloads/events"
 )
 
 //go:embed listeners.tmpl

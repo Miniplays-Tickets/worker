@@ -2,7 +2,7 @@ package command
 
 import (
 	"github.com/Miniplays-Tickets/worker/i18n"
-	"github.com/rxdn/gdl/objects/interaction"
+	"github.com/TicketsBot-cloud/gdl/objects/interaction"
 )
 
 type Argument struct {

@@ -5,7 +5,7 @@ import (
 	"github.com/Miniplays-Tickets/worker/bot/command/registry"
 	"github.com/Miniplays-Tickets/worker/i18n"
 	"github.com/TicketsBot-cloud/common/permission"
-	"github.com/rxdn/gdl/objects/interaction"
+	"github.com/TicketsBot-cloud/gdl/objects/interaction"
 )
 
 type StatsCommand struct {

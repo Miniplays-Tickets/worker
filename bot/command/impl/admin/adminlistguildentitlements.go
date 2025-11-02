@@ -11,10 +11,11 @@ import (
 	"github.com/Miniplays-Tickets/worker/bot/command/registry"
 	"github.com/Miniplays-Tickets/worker/bot/customisation"
 	"github.com/Miniplays-Tickets/worker/bot/dbclient"
+	"github.com/Miniplays-Tickets/worker/bot/utils"
 	"github.com/Miniplays-Tickets/worker/i18n"
 	"github.com/TicketsBot-cloud/common/permission"
-	"github.com/rxdn/gdl/objects/channel/embed"
-	"github.com/rxdn/gdl/objects/interaction"
+	"github.com/TicketsBot-cloud/gdl/objects/interaction"
+	"github.com/TicketsBot-cloud/gdl/objects/interaction/component"
 )
 
 type AdminListGuildEntitlementsCommand struct {
@@ -35,7 +36,7 @@ func (AdminListGuildEntitlementsCommand) Properties() registry.Properties {
 	}
 }
 
-func (c AdminListGuildEntitlementsCommand) GetExecutor() interface{} {
+func (c AdminListGuildEntitlementsCommand) GetExecutor() any {
 	return c.Execute
 }
 
@@ -91,31 +92,37 @@ func (AdminListGuildEntitlementsCommand) Execute(ctx registry.CommandContext, gu
 		return
 	}
 
-	embed := embed.NewEmbed().
-		SetTitle("Entitlements").
-		SetColor(ctx.GetColour(customisation.Blue))
-
 	if len(entitlements) == 0 {
-		embed.SetDescription("No entitlements found")
+		ctx.ReplyRaw(customisation.Red, ctx.GetMessage(i18n.Error), "This guild has no entitlements")
+		return
 	}
 
-	for i, entitlement := range entitlements {
-		if i >= 25 {
-			embed.SetDescription("Too many entitlements to display")
-			break
-		}
+	innerComponents := []component.Component{}
 
+	for _, entitlement := range entitlements {
+		sourceFormatted := string(entitlement.Source)
+		if sourceFormatted == "" {
+			sourceFormatted = "None"
+		}
 		value := fmt.Sprintf(
-			"**Tier:** %s\n**Source:** %s\n**Expires:** <t:%d>\n**SKU ID:** %s\n**SKU Priority:** %d",
+			"####%s\n\n**Tier:** %s\n**Source:** %s\n**Expires:** <t:%d>\n**SKU ID:** %s\n**SKU Priority:** %d\n\n",
+			entitlement.SkuLabel,
 			entitlement.Tier,
-			entitlement.Source,
+			sourceFormatted,
 			entitlement.ExpiresAt.Unix(),
 			entitlement.SkuId.String(),
 			entitlement.SkuPriority,
 		)
 
-		embed.AddField(entitlement.SkuLabel, value, false)
+		innerComponents = append(innerComponents, component.BuildTextDisplay(component.TextDisplay{Content: value}))
 	}
 
-	ctx.ReplyWithEmbed(embed)
+	ctx.ReplyWith(command.NewMessageResponseWithComponents([]component.Component{
+		utils.BuildContainerWithComponents(
+			ctx,
+			customisation.Orange,
+			"Admin - Guild Entitlements",
+			innerComponents,
+		),
+	}))
 }

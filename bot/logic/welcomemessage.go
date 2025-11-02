@@ -20,10 +20,10 @@ import (
 	"github.com/TicketsBot-cloud/common/premium"
 	"github.com/TicketsBot-cloud/common/sentry"
 	"github.com/TicketsBot-cloud/database"
-	"github.com/rxdn/gdl/objects/channel/embed"
-	"github.com/rxdn/gdl/objects/guild/emoji"
-	"github.com/rxdn/gdl/objects/interaction/component"
-	"github.com/rxdn/gdl/rest"
+	"github.com/TicketsBot-cloud/gdl/objects/channel/embed"
+	"github.com/TicketsBot-cloud/gdl/objects/guild/emoji"
+	"github.com/TicketsBot-cloud/gdl/objects/interaction/component"
+	"github.com/TicketsBot-cloud/gdl/rest"
 	"golang.org/x/sync/errgroup"
 )
 
@@ -338,6 +338,10 @@ var substitutions = map[string]PlaceholderSubstitutionFunc{
 	"username": func(ctx context.Context, worker *worker.Context, ticket database.Ticket) string {
 		user, _ := worker.GetUser(ticket.UserId)
 		return user.Username
+	},
+	"nickname": func(ctx context.Context, worker *worker.Context, ticket database.Ticket) string {
+		member, _ := worker.GetGuildMember(ticket.GuildId, ticket.UserId)
+		return member.Nick
 	},
 	"server": func(ctx context.Context, worker *worker.Context, ticket database.Ticket) string {
 		guild, _ := worker.GetGuild(ticket.GuildId)

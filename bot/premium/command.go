@@ -13,9 +13,9 @@ import (
 	"github.com/Miniplays-Tickets/worker/i18n"
 	"github.com/TicketsBot-cloud/common/model"
 	"github.com/TicketsBot-cloud/database"
+	"github.com/TicketsBot-cloud/gdl/objects/interaction"
+	"github.com/TicketsBot-cloud/gdl/objects/interaction/component"
 	"github.com/jackc/pgx/v4"
-	"github.com/rxdn/gdl/objects/interaction"
-	"github.com/rxdn/gdl/objects/interaction/component"
 )
 
 const PremiumStoreSku uint64 = 1274473638065606656
@@ -25,14 +25,17 @@ func BuildKeyModal(guildId uint64) interaction.ModalResponseData {
 		CustomId: "premium_key_modal",
 		Title:    i18n.GetMessageFromGuild(guildId, i18n.MessagePremiumActivateKey),
 		Components: []component.Component{
-			component.BuildActionRow(component.BuildInputText(component.InputText{
-				Style:       component.TextStyleShort,
-				CustomId:    "key",
+			component.BuildLabel(component.Label{
 				Label:       i18n.GetMessageFromGuild(guildId, i18n.MessagePremiumKey),
-				Placeholder: utils.Ptr("aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee"),
-				MinLength:   utils.Ptr(uint32(36)),
-				MaxLength:   utils.Ptr(uint32(36)),
-			})),
+				Description: utils.Ptr(i18n.GetMessageFromGuild(guildId, i18n.MessagePremiumKey)),
+				Component: component.BuildInputText(component.InputText{
+					Style:       component.TextStyleShort,
+					CustomId:    "key",
+					Placeholder: utils.Ptr("aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee"),
+					MinLength:   utils.Ptr(uint32(36)),
+					MaxLength:   utils.Ptr(uint32(36)),
+				}),
+			}),
 		},
 	}
 }

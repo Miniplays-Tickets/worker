@@ -11,8 +11,8 @@ import (
 	"github.com/Miniplays-Tickets/worker/bot/logic"
 	"github.com/Miniplays-Tickets/worker/i18n"
 	"github.com/TicketsBot-cloud/common/permission"
-	"github.com/rxdn/gdl/objects/channel"
-	"github.com/rxdn/gdl/objects/interaction"
+	"github.com/TicketsBot-cloud/gdl/objects/channel"
+	"github.com/TicketsBot-cloud/gdl/objects/interaction"
 )
 
 type ClaimCommand struct {

@@ -11,8 +11,8 @@ import (
 	"github.com/Miniplays-Tickets/worker/i18n"
 	"github.com/TicketsBot-cloud/common/permission"
 	"github.com/TicketsBot-cloud/database"
-	"github.com/rxdn/gdl/objects/interaction"
-	"github.com/rxdn/gdl/rest"
+	"github.com/TicketsBot-cloud/gdl/objects/interaction"
+	"github.com/TicketsBot-cloud/gdl/rest"
 )
 
 type UnclaimCommand struct {
@@ -93,7 +93,14 @@ func (UnclaimCommand) Execute(ctx *context.SlashCommandContext) {
 		}
 	}
 
-	overwrites, err := logic.CreateOverwrites(ctx.Context, ctx, ticket.UserId, panel)
+	// Get the channel to determine its parent category
+	ch, err := ctx.Worker().GetChannel(ctx.ChannelId())
+	if err != nil {
+		ctx.HandleError(err)
+		return
+	}
+
+	overwrites, err := logic.CreateOverwrites(ctx.Context, ctx, ticket.UserId, panel, ch.ParentId.Value)
 	if err != nil {
 		ctx.HandleError(err)
 		return

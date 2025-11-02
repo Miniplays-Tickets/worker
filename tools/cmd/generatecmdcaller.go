@@ -14,8 +14,8 @@ import (
 	"github.com/Miniplays-Tickets/worker/bot/command/manager"
 	"github.com/Miniplays-Tickets/worker/bot/command/registry"
 	"github.com/Miniplays-Tickets/worker/bot/utils"
-	"github.com/rxdn/gdl/objects/channel"
-	"github.com/rxdn/gdl/objects/interaction"
+	"github.com/TicketsBot-cloud/gdl/objects/channel"
+	"github.com/TicketsBot-cloud/gdl/objects/interaction"
 )
 
 type executorData struct {

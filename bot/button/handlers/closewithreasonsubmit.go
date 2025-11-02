@@ -8,6 +8,7 @@ import (
 	"github.com/Miniplays-Tickets/worker/bot/command/context"
 	"github.com/Miniplays-Tickets/worker/bot/constants"
 	"github.com/Miniplays-Tickets/worker/bot/logic"
+	"github.com/TicketsBot-cloud/gdl/objects/interaction"
 )
 
 type CloseWithReasonSubmitHandler struct{}
@@ -33,12 +34,19 @@ func (h *CloseWithReasonSubmitHandler) Execute(ctx *context.ModalContext) {
 	}
 
 	actionRow := data.Components[0]
-	if len(actionRow.Components) == 0 { // Text input missing
+	if len(actionRow.Components) == 0 && actionRow.Component == nil { // Text input missing
 		ctx.HandleError(fmt.Errorf("Modal missing text input"))
 		return
 	}
 
-	textInput := actionRow.Components[0]
+	var textInput interaction.ModalSubmitInteractionComponentData
+
+	if actionRow.Component != nil {
+		textInput = *actionRow.Component
+	} else {
+		textInput = actionRow.Components[0]
+	}
+
 	if textInput.CustomId != "reason" {
 		ctx.HandleError(fmt.Errorf("Text input custom ID mismatch"))
 		return

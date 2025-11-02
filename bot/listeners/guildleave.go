@@ -8,7 +8,7 @@ import (
 	"github.com/Miniplays-Tickets/worker/bot/dbclient"
 	"github.com/Miniplays-Tickets/worker/bot/metrics/statsd"
 	"github.com/TicketsBot-cloud/common/sentry"
-	"github.com/rxdn/gdl/gateway/payloads/events"
+	"github.com/TicketsBot-cloud/gdl/gateway/payloads/events"
 )
 
 /*

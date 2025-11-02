@@ -15,9 +15,9 @@ import (
 	"github.com/TicketsBot-cloud/common/permission"
 	"github.com/TicketsBot-cloud/common/premium"
 	"github.com/TicketsBot-cloud/common/sentry"
-	"github.com/rxdn/gdl/objects/channel/embed"
-	"github.com/rxdn/gdl/objects/channel/message"
-	"github.com/rxdn/gdl/objects/interaction"
+	"github.com/TicketsBot-cloud/gdl/objects/channel/embed"
+	"github.com/TicketsBot-cloud/gdl/objects/channel/message"
+	"github.com/TicketsBot-cloud/gdl/objects/interaction"
 )
 
 type TagCommand struct {
@@ -118,7 +118,7 @@ func (TagCommand) AutoCompleteHandler(data interaction.ApplicationCommandAutoCom
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second*3) // TODO: Propagate context
 	defer cancel()
 
-	tagIds, err := dbclient.Client.Tag.GetStartingWith(ctx, data.GuildId.Value, value, 25)
+	tagIds, err := dbclient.Client.Tag.GetContaining(ctx, data.GuildId.Value, value, 25)
 	if err != nil {
 		sentry.Error(err) // TODO: Error context
 		return nil

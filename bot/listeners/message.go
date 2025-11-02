@@ -17,7 +17,7 @@ import (
 	"github.com/TicketsBot-cloud/common/premium"
 	"github.com/TicketsBot-cloud/common/sentry"
 	"github.com/TicketsBot-cloud/database"
-	"github.com/rxdn/gdl/gateway/payloads/events"
+	"github.com/TicketsBot-cloud/gdl/gateway/payloads/events"
 )
 
 // proxy messages to web UI + set last message id

@@ -13,7 +13,7 @@ import (
 	"github.com/Miniplays-Tickets/worker/bot/utils"
 	"github.com/TicketsBot-cloud/common/sentry"
 	"github.com/TicketsBot-cloud/database"
-	"github.com/rxdn/gdl/gateway/payloads/events"
+	"github.com/TicketsBot-cloud/gdl/gateway/payloads/events"
 )
 
 func OnThreadUpdate(worker *worker.Context, e events.ThreadUpdate) {

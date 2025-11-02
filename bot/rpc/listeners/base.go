@@ -8,7 +8,7 @@ import (
 	"github.com/Miniplays-Tickets/worker"
 	"github.com/Miniplays-Tickets/worker/bot/dbclient"
 	"github.com/Miniplays-Tickets/worker/config"
-	"github.com/rxdn/gdl/cache"
+	"github.com/TicketsBot-cloud/gdl/cache"
 )
 
 type BaseListener struct {

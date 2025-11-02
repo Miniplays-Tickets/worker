@@ -10,8 +10,8 @@ import (
 	"github.com/Miniplays-Tickets/worker/bot/utils"
 	"github.com/TicketsBot-cloud/common/collections"
 	"github.com/TicketsBot-cloud/database"
-	"github.com/rxdn/gdl/objects/member"
-	"github.com/rxdn/gdl/rest/request"
+	"github.com/TicketsBot-cloud/gdl/objects/member"
+	"github.com/TicketsBot-cloud/gdl/rest/request"
 	"golang.org/x/sync/errgroup"
 )
 

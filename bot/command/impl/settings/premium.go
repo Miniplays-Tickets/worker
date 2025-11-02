@@ -13,10 +13,10 @@ import (
 	"github.com/Miniplays-Tickets/worker/i18n"
 	"github.com/TicketsBot-cloud/common/permission"
 	"github.com/TicketsBot-cloud/common/premium"
-	"github.com/rxdn/gdl/objects/channel/embed"
-	"github.com/rxdn/gdl/objects/guild/emoji"
-	"github.com/rxdn/gdl/objects/interaction"
-	"github.com/rxdn/gdl/objects/interaction/component"
+	"github.com/TicketsBot-cloud/gdl/objects/channel/embed"
+	"github.com/TicketsBot-cloud/gdl/objects/guild/emoji"
+	"github.com/TicketsBot-cloud/gdl/objects/interaction"
+	"github.com/TicketsBot-cloud/gdl/objects/interaction/component"
 )
 
 type PremiumCommand struct {
@@ -113,19 +113,19 @@ func (PremiumCommand) Execute(ctx registry.CommandContext) {
 							component.SelectOption{
 								Label:       "Patreon", // Don't translate
 								Value:       "patreon",
-								Description: ctx.GetMessage(i18n.MessagePremiumMethodSelectorPatreon),
+								Description: utils.Ptr(ctx.GetMessage(i18n.MessagePremiumMethodSelectorPatreon)),
 								Emoji:       patreonEmoji,
 							},
 							component.SelectOption{
 								Label:       "Discord",
 								Value:       "discord",
-								Description: ctx.GetMessage(i18n.MessagePremiumMethodSelectorDiscord),
+								Description: utils.Ptr(ctx.GetMessage(i18n.MessagePremiumMethodSelectorDiscord)),
 								Emoji:       discordEmoji,
 							},
 							component.SelectOption{
 								Label:       ctx.GetMessage(i18n.MessagePremiumGiveawayKey),
 								Value:       "key",
-								Description: ctx.GetMessage(i18n.MessagePremiumMethodSelectorKey),
+								Description: utils.Ptr(ctx.GetMessage(i18n.MessagePremiumMethodSelectorKey)),
 								Emoji:       keyEmoji,
 							},
 						),

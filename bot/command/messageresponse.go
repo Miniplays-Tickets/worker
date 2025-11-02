@@ -1,11 +1,11 @@
 package command
 
 import (
-	"github.com/rxdn/gdl/objects/channel/embed"
-	"github.com/rxdn/gdl/objects/channel/message"
-	"github.com/rxdn/gdl/objects/interaction"
-	"github.com/rxdn/gdl/objects/interaction/component"
-	"github.com/rxdn/gdl/rest"
+	"github.com/TicketsBot-cloud/gdl/objects/channel/embed"
+	"github.com/TicketsBot-cloud/gdl/objects/channel/message"
+	"github.com/TicketsBot-cloud/gdl/objects/interaction"
+	"github.com/TicketsBot-cloud/gdl/objects/interaction/component"
+	"github.com/TicketsBot-cloud/gdl/rest"
 )
 
 type MessageResponse struct {
@@ -40,6 +40,20 @@ func NewEmbedMessageResponseWithComponents(e *embed.Embed, components []componen
 	return MessageResponse{
 		Embeds:     []*embed.Embed{e},
 		Components: components,
+	}
+}
+
+func NewMessageResponseWithComponents(components []component.Component) MessageResponse {
+	return MessageResponse{
+		Components: components,
+		Flags:      message.SumFlags(message.FlagComponentsV2),
+	}
+}
+
+func NewEphemeralMessageResponseWithComponents(components []component.Component) MessageResponse {
+	return MessageResponse{
+		Components: components,
+		Flags:      message.SumFlags(message.FlagEphemeral, message.FlagComponentsV2),
 	}
 }
 

@@ -5,7 +5,7 @@ import (
 	"time"
 
 	"github.com/Miniplays-Tickets/worker/bot/utils"
-	"github.com/rxdn/gdl/objects/interaction"
+	"github.com/TicketsBot-cloud/gdl/objects/interaction"
 )
 
 type InteractionErrorContext struct {

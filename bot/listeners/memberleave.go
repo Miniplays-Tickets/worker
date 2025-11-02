@@ -11,13 +11,13 @@ import (
 	"github.com/Miniplays-Tickets/worker/bot/logic"
 	"github.com/Miniplays-Tickets/worker/bot/utils"
 	"github.com/TicketsBot-cloud/common/sentry"
-	"github.com/rxdn/gdl/gateway/payloads/events"
-	gdlUtils "github.com/rxdn/gdl/utils"
+	"github.com/TicketsBot-cloud/gdl/gateway/payloads/events"
+	gdlUtils "github.com/TicketsBot-cloud/gdl/utils"
 )
 
 // Remove user permissions when they leave
 func OnMemberLeave(worker *worker.Context, e events.GuildMemberRemove) {
-	ctx, cancel := context.WithTimeout(context.Background(), time.Second*3) // TODO: Propagate context
+	ctx, cancel := context.WithTimeout(context.Background(), time.Second*15) // TODO: Propagate context
 	defer cancel()
 
 	if err := dbclient.Client.Permissions.RemoveSupport(ctx, e.GuildId, e.User.Id); err != nil {

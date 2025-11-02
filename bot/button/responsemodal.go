@@ -4,7 +4,7 @@ import (
 	"errors"
 
 	"github.com/Miniplays-Tickets/worker"
-	"github.com/rxdn/gdl/objects/interaction"
+	"github.com/TicketsBot-cloud/gdl/objects/interaction"
 )
 
 type ResponseModal struct {

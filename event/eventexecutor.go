@@ -8,8 +8,8 @@ import (
 	"github.com/Miniplays-Tickets/worker"
 	"github.com/Miniplays-Tickets/worker/bot/listeners"
 	"github.com/Miniplays-Tickets/worker/bot/metrics/prometheus"
+	"github.com/TicketsBot-cloud/gdl/gateway/payloads"
 	"github.com/getsentry/sentry-go"
-	"github.com/rxdn/gdl/gateway/payloads"
 )
 
 func execute(c *worker.Context, event []byte) error {
