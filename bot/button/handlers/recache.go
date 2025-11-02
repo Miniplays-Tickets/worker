@@ -7,17 +7,17 @@ import (
 	"strings"
 	"time"
 
+	w "github.com/Miniplays-Tickets/worker"
+	"github.com/Miniplays-Tickets/worker/bot/button/registry"
+	"github.com/Miniplays-Tickets/worker/bot/button/registry/matcher"
+	"github.com/Miniplays-Tickets/worker/bot/command"
+	"github.com/Miniplays-Tickets/worker/bot/command/context"
+	"github.com/Miniplays-Tickets/worker/bot/customisation"
+	"github.com/Miniplays-Tickets/worker/bot/dbclient"
+	"github.com/Miniplays-Tickets/worker/bot/redis"
+	"github.com/Miniplays-Tickets/worker/bot/utils"
 	permcache "github.com/TicketsBot-cloud/common/permission"
 	"github.com/TicketsBot-cloud/gdl/objects/interaction/component"
-	w "github.com/TicketsBot-cloud/worker"
-	"github.com/TicketsBot-cloud/worker/bot/button/registry"
-	"github.com/TicketsBot-cloud/worker/bot/button/registry/matcher"
-	"github.com/TicketsBot-cloud/worker/bot/command"
-	"github.com/TicketsBot-cloud/worker/bot/command/context"
-	"github.com/TicketsBot-cloud/worker/bot/customisation"
-	"github.com/TicketsBot-cloud/worker/bot/dbclient"
-	"github.com/TicketsBot-cloud/worker/bot/redis"
-	"github.com/TicketsBot-cloud/worker/bot/utils"
 )
 
 type RecacheHandler struct{}
