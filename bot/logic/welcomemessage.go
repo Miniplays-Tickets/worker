@@ -594,6 +594,10 @@ func BuildCustomEmbed(
 		e.SetAuthor(*customEmbed.AuthorName, utils.ValueOrZero(customEmbed.AuthorUrl), utils.ValueOrZero(customEmbed.AuthorIconUrl))
 	}
 
+	if customEmbed.FooterText != nil {
+		e.SetFooter(*customEmbed.FooterText, utils.ValueOrZero(customEmbed.FooterIconUrl))
+	}
+
 	for _, field := range fields {
 		value := field.Value
 		if ticket.Id != 0 {
